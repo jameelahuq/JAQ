@@ -13,5 +13,8 @@ var posts = new mongoose.Schema({
 posts.methods.likeIt = function(){
   this.likes ++
 }
+posts.methods.dislikeIt = function(){
+  this.likes --
+}
 
 module.exports = mongoose.model('Posts',posts);

@@ -6,6 +6,8 @@ var user = new mongoose.Schema({
   // name: {type: String, required: true},
   posts: [{type: mongoose.Schema.ObjectId, ref:'Posts'}],
   comments:[{type: mongoose.Schema.ObjectId, ref: 'Comments'}],
+  following:[{type: mongoose.Schema.ObjectId, ref: 'Users'}],
+  followers:[{type: mongoose.Schema.ObjectId, ref: 'Users'}],
   google           : {
     id           : String,
     token        : String,
