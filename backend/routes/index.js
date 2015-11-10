@@ -149,7 +149,10 @@ router.post('/addUser', function(req, res){
 })
 
 router.get('/submit/:mail', function(req,res) {
-    var mailgun = new Mailgun({apiKey: config.MAILGUN_KEY, domain: config.MAILGUN_DOMAIN});
+    var mailgun = new Mailgun({
+      apiKey: config.MAILGUN_KEY, 
+      domain: config.MAILGUN_DOMAIN
+    });
 
     var data = {
       from: 'Andy@gmail.org',
