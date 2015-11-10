@@ -12,6 +12,10 @@ var app = express();
 var config = require('./config');
 
 
+// Mailgun //
+var mailgun = require('mailgun-js');
+
+
 // Database connection
 var mongoose=require('mongoose')
 .connect(config.MONGO_URL);

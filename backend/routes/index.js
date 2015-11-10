@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var Mailgun = require('mailgun-js');
+var config = require('../config.js');
 
 
 // require the mongoose schemas
@@ -24,6 +26,7 @@ router.get('/getPosts', function(req,res){
 router.post('/addPost/:authorId', function(req,res){
   Post.create({
     author: req.params.authorId,
+    thePost:req.body.thePost,
     likes: req.body.likes,
     comments: req.body.comments,
     title: req.body.title
@@ -96,6 +99,10 @@ router.post('/likedComment/:liked', function(req,res){
 })
 
 router.delete('/removeComment/:commentId/:userId', function(req,res){
+//   Comment.pre('remove', function(next) {
+//     // Remove all the assignment docs that reference the removed person.
+//     this.model('Post').remove({ comment: this._id }, next);
+// });
   Comment.findById(req.params.commentId, function(err,data){
     if (data && data.author == req.params.userId){
       data.remove();
@@ -127,6 +134,7 @@ router.post('/addComment/:postId/:userId', function(req, res){
     res.send(comment)
   }) 
 })
+/////////EXPERIMENT//////
 
 
 // user routes \\
@@ -139,6 +147,27 @@ router.post('/addUser', function(req, res){
       res.send(user);
   })
 })
+
+router.get('/submit/:mail', function(req,res) {
+    var mailgun = new Mailgun({apiKey: config.MAILGUN_KEY, domain: config.MAILGUN_DOMAIN});
+
+    var data = {
+      from: 'Andy@gmail.org',
+      to: req.params.mail, 
+      subject: 'Hello from Mailgun',
+      html: 'This is pretty cool'
+    }
+    mailgun.messages().send(data, function (err, body) {
+        if (err) {
+            res.send(err)
+        }
+
+        else {
+            res.status('submitted').send({ email : req.params.mail });
+        }
+    });
+
+});
 
 
 module.exports = router;
