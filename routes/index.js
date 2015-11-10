@@ -18,10 +18,10 @@ router.get('/', function(req, res, next) {
 
 router.get('/getPosts', function(req,res){
   Post.find({}, function(err,data){
-    if(err){res.send(err)};
+    if(err){res.send(err)}
     res.send(data)
   })
-})
+});
 
 router.post('/addPost/:authorId', function(req,res){
   Post.create({
