@@ -27,7 +27,6 @@ jaqApp.config(function($stateProvider, $urlRouterProvider) {
             controller  : 'postCtrl'
         });
   
-  $urlRouterProvider.otherwise('/home')
 });
 
 $(document).ready(function(){
