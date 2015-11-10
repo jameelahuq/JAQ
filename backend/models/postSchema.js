@@ -6,6 +6,7 @@ var posts = new mongoose.Schema({
   likes: {type: Number, default:0},
   comments: [{type: mongoose.Schema.ObjectId, ref:'Comments' }],
   title: {type: String, required:true},
+  tags:[String]
 })
 
 posts.methods.likeIt = function(){

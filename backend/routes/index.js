@@ -7,17 +7,19 @@ var Post = require('../models/postSchema');
 var Comment = require('../models/commentSchema');
 var User = require('../models/userSchema');
 
-
-
-
-
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-
 // post routes \\
+
+router.get('/getPosts', function(req,res){
+  Post.find({}, function(err,data){
+    if(err){res.send(err)};
+    res.send(data)
+  })
+})
 
 router.post('/addPost/:authorId', function(req,res){
   Post.create({
@@ -48,9 +50,39 @@ router.post('/likedPost/:liked', function(req,res){
   });
 })
 
+router.delete('/removePost/:postId/:userId', function(req,res){
+  Post.findById(req.params.postId, function(err,data){
+    if (data && data.author == req.params.userId){
+      data.remove();
+      data.save();
+      res.send(data + ' was removed')
+    }else{
+      res.send('The file was not found or you do not have permission to delete it')
+    }
+
+  })
+})
 
 
+router.post('/addTag/:postId',function(req,res){
+  Post.findById(req.params.postId, function(err, thePost){
+    console.log(req.body.tag)
+    thePost.tags.push(req.body.tag)
+    thePost.save();
+    res.send(thePost)
+  })
+})
 
+router.post('/findByTag',function (req,res){
+  Post.find({"tags":req.body.tag}, function(err,result){
+    console.log(result)
+    if(err) res.send(err);
+    if(result.length === 0) res.send('That tag was not found');
+    else {
+      res.send(result);
+    }
+  })
+})
 
 // comment routes \\
 
@@ -63,16 +95,28 @@ router.post('/likedComment/:liked', function(req,res){
   });
 })
 
+router.delete('/removeComment/:commentId/:userId', function(req,res){
+  Comment.findById(req.params.commentId, function(err,data){
+    if (data && data.author == req.params.userId){
+      data.remove();
+      data.save();
+      res.send(data + ' was removed')
+    }else{
+      res.send('The file was not found or you do not have permission to delete it')
+    }
+  })
+})
 
 router.post('/addComment/:userId', function(req, res){
-  Comment.create({
-    author: req.params.userId,
-    text: req.body.text
+  Comment.create({              //
+    author: req.params.userId, //need to associate with a post
+    text: req.body.text         //
   }, function(err,comment){
     if(err) res.send(err);
       res.send(comment)
   }) 
 })
+
 
 // user routes \\
 
