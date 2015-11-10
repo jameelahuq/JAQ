@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Mailgun = require('mailgun-js');
-var config = require('../config.js');
+var config = require('../config/config.js');
 
 
 // require the mongoose schemas
@@ -139,14 +139,14 @@ router.post('/addComment/:postId/:userId', function(req, res){
 
 // user routes \\
 
-router.post('/addUser', function(req, res){
-  User.create({
-    name: req.body.name
-  }, function(err,user){
-    if(err) res.send(err)
-      res.send(user);
-  })
-})
+// router.post('/addUser', function(req, res){
+//   User.create({
+//     name: req.body.name
+//   }, function(err,user){
+//     if(err) res.send(err)
+//       res.send(user);
+//   })
+// })
 
 router.get('/submit/:mail', function(req,res) {
     var mailgun = new Mailgun({
@@ -155,7 +155,7 @@ router.get('/submit/:mail', function(req,res) {
     });
 
     var data = {
-      from: 'Andy@gmail.org',
+      from: 'JAQd@blogs.com',
       to: req.params.mail, 
       subject: 'Hello from Mailgun',
       html: 'This is pretty cool'
