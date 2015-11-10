@@ -5,7 +5,7 @@ jaqApp.config(function($stateProvider, $urlRouterProvider) {
         .state('home', {
             url: '/home',
             templateUrl : 'pages/home.html',
-            controller  : 'homeCtrl'
+            controller  : 'postCtrl'
         })
 
         .state('profile', {
