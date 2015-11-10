@@ -59,7 +59,6 @@ module.exports = function(app, passport) {
         failureRedirect : '/'
       }));
 
-
   // =====================================
   // TWITTER ROUTES ======================
   // =====================================
