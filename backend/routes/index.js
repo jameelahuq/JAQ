@@ -107,13 +107,24 @@ router.delete('/removeComment/:commentId/:userId', function(req,res){
   })
 })
 
-router.post('/addComment/:userId', function(req, res){
+router.post('/addComment/:postId/:userId', function(req, res){
   Comment.create({              //
     author: req.params.userId, //need to associate with a post
     text: req.body.text         //
   }, function(err,comment){
     if(err) res.send(err);
-      res.send(comment)
+    User.findByIdAndUpdate(req.params.userId ,{$push:{
+      'comments':comment._id}
+    }, function(err,user){
+      Post.findByIdAndUpdate(req.params.postId ,{$push:{
+        'comments':comment._id}
+      },function(err,thePost){
+        if(err) res.send(err);
+        thePost.save();
+        user.save();
+      })
+    })
+    res.send(comment)
   }) 
 })
 
@@ -125,7 +136,7 @@ router.post('/addUser', function(req, res){
     name: req.body.name
   }, function(err,user){
     if(err) res.send(err)
-    res.send(user);
+      res.send(user);
   })
 })
 
