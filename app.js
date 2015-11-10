@@ -1,4 +1,4 @@
-var express = require('express');
+ var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -61,7 +61,7 @@ app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secre
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
-require('./oauth.js')(app, passport); //
+require('./routes/oauth.js')(app, passport); //
 
 
 
