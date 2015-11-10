@@ -14,8 +14,6 @@
   <link rel="stylesheet" href="  https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="css/style.css" />
-
-
 </head>
 
 <body>
@@ -44,13 +42,13 @@
         </li>
       </ul>
       <ul class="right">
+       <li><a href="#home">Feed  <i class="fa fa-home fa-lg"></i></a></li>
         <li><a href="#profile">Profile  <i class="fa fa-user fa-lg"></i></a></li>
-        <li><a class="js-mo" href="#">Post  <i class="fa fa-plus-square-o fa-lg"></i></a></li>
+        <li><a class="js-mo">Post  <i class="fa fa-plus-square-o fa-lg"></i></a></li>
         <li><a href="#login">Sign In  <i class="fa fa-google fa-lg"></i></a></li>
       </ul>
       <ul>
 
-        <!-- Left Nav Section -->
         <ul class="left">
 
         </ul>
@@ -87,32 +85,21 @@
   <script src="js/controllers/loginCtrl.js"></script>
   <script src="js/controllers/postCtrl.js"></script>
   <script src="js/controllers/profileCtrl.js"></script>
+  <script src="js/controllers/yourpostsCtrl.js"></script>
+  <script src="js/controllers/followCtrl.js"></script>
+  <script src="js/controllers/follwersCtrl.js"></script>
+  <script src="js/controllers/tagsCtrl.js"></script>
+  
   <script>
     $(document).ready(function () {
       $(document).foundation();
     });
 
-    $(function () { // On DomeReady event
+    $(function () { 
 
-      //Shows checkboxes but doesn't hide when mouse exits text
       $('.js-mo').on('click', function (e) {
         $('.js-checkbox-container').slideToggle(400);
       });
-
-      //Hides checkboxes on mouseover
-      $('.js-me').on('click', function (e) {
-        $('.js-checkbox-container').slideUp();
-      });
-
-      // shows checkboxes on mouseover and hides them on mouseout
-      $(".js-hover").click(
-        function (e) {
-          $('.js-checkbox-container').slideDown();
-        },
-        function (e) {
-          $('.js-checkbox-container').slideUp();
-        }
-      );
     });
   </script>;
 </body>
