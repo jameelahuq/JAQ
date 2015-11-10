@@ -13,6 +13,7 @@ var config = require('./config/config');
 
 
 
+
 //jameelas stuff
 var passport = require('passport');
 var flash    = require('connect-flash');
@@ -43,7 +44,7 @@ var mongoose=require('mongoose')
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'ejs');
 
 
 
@@ -55,14 +56,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-
 // required for passport jameelas stuff continues
 app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
-require('./routes.js')(app, passport); // 
+require('./oauth.js')(app, passport); //
 
 
 
@@ -84,10 +83,7 @@ app.use(function(req, res, next) {
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
-    });
+    res.send(err);
   });
 }
 
@@ -95,10 +91,7 @@ if (app.get('env') === 'development') {
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
+  res.send(err);
 });
 
 
