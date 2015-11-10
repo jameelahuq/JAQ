@@ -1,11 +1,10 @@
 var mongoose = require('mongoose');
 
 var posts = new mongoose.Schema({
-  author:String, // make this into a userSchema 
-  date: Date,
+  author:{type: mongoose.Schema.ObjectId, ref:'User'}, 
+  date: {type: Date},
   likes: {type: Number, default:0},
-
-  comments: String, // this will be linked to comment schema
+  comments: {type: mongoose.Schema.ObjectId, ref:'Comments' },
   title: {type: String, required:true}
 })
 
