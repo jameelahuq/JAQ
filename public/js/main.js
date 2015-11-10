@@ -29,3 +29,8 @@ jaqApp.config(function($stateProvider, $urlRouterProvider) {
   
   $urlRouterProvider.otherwise('/home')
 });
+
+$(document).ready(function(){
+    $(document).foundation();
+});
+    
