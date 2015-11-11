@@ -4,21 +4,16 @@
 
 
 
-    <article class="more" ng-repeat="post in posts track by $index">
-
-      <h3><a href="#">{{post.title}}</a></h3>
-      <h6>Written by <a href="#">{{post.google.name}}</a> on {{post.date}}</h6>
-
-      <div class="row">
-        <div class="large-12 columns">
+    <article class="more" ng-repeat="datum in data track by $index">
+      <div ng-repeat="post in datum.posts track by $index">
+        <h3><a href="#">{{post.title}}</a></h3>
+        <h6>Written by <a href="#/profile/{{datum._id}}">{{datum.google.name}}</a> on {{post.date}}</h6>
         <p>{{post.thePost}}</p>
-         <p ng-repeat="tag in post.tags">Tags: {{tag}}</p>
-        </div>
-        <div class="large-6 columns">
-          <img src="http://placehold.it/400x240&text=[img]" />
-        </div>
+        <div ng-repeat="tag in post.tags track by $index"><p><b>Tags:</b> {{tag}}</p></div>
         <hr/>
       </div>
+      
+        
     </article>
 
   </div>
