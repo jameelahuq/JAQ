@@ -27,7 +27,7 @@
        <li><a href="#home">Feed  <i class="fa fa-home fa-lg"></i></a></li>
         <li><a href="#profile">Profile  <i class="fa fa-user fa-lg"></i></a></li>
         <li><a class="js-mo">Post  <i class="fa fa-plus-square-o fa-lg"></i></a></li>
-        <li><a href="/auth/google" class="btn btn-danger"><span class="fa fa-google-plus"></span>Sign In</a></li>
+        <li><a class="btn btn-danger" ng-click="login()"><span class="fa fa-google-plus"></span>Sign In</a></li>
       </ul>
       <ul>
 
@@ -42,7 +42,7 @@
     <div class="hidden js-checkbox-container hidden checkbox-container">
      <form action="">
       <input type="text" placeholder="Blog Title" ng-model="post.title">
-      <textarea class="postBody" placeholder={{message}} ng-model="post.body"></textarea>
+      <textarea class="postBody" placeholder={{message}} ng-model="post.thePost"></textarea>
       <div class="row">
         <div class="medium-8 columns">
           <input type="text" placeholder="Tags" ng-model="post.tags">
@@ -54,25 +54,17 @@
   
 </div>
     
-    
-    
-    
-    
-  
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-    
-   <script>
-     
-    $(document).ready(function ($scope) {
-      $(document).foundation();
-      
-    });
-
+      <script>
     $(function () { 
-
       $('.js-mo').on('click', function (e) {
         $('.js-checkbox-container').slideToggle(400);
       });
     });
     
   </script>
+    
+    
+    
+  
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    
