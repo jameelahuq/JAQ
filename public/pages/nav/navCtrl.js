@@ -19,7 +19,7 @@ jaqApp.controller('navCtrl', function($scope, $http) {
   $http({
   method: 'POST',
   data: post,
-  url: 'http://localhost:8080/addPost/56425e4b8ac17ff716d35431'
+  url: 'http://localhost:8080/addPost'
 
 }).then(function successCallback(response) {
     console.log(response)
