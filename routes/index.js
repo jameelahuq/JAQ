@@ -193,6 +193,21 @@ router.get('/users/:field',function(req,res){
   })
 })
 
+router.get('/user/id',function(req,res){
+  User.findById(req.user._id)
+    .exec(function (err, data){
+    err ? res.status(401).send(err) : res.send(data)
+  })
+})
+
+router.get('/everything',function(req,res){
+  User.find({})
+  .populate("posts")
+    .exec(function (err, data){
+    err ? res.status(401).send(err) : res.send(data)
+  })
+})
+
 router.get('/submit/:mail', function(req,res) {
     var mailgun = new Mailgun({
       apiKey: config.MAILGUN_KEY, 

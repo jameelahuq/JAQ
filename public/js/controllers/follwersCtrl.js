@@ -1,3 +1,11 @@
-jaqApp.controller('followersCtrl', function($scope) {
-      $scope.message = 'Everyone come and see how good I look!';
-});
+//jaqApp.controller('followersCtrl', function($scope, $http) {
+//$http({
+//  method: 'GET',
+//  url: 'http://localhost:8080/users/posts'
+//    //change the userID depending on signed in user
+//    }).then(function successCallback(response) {
+//    console.log("yourpostctrl", response)
+//    $scope.posts = response.data
+//  }, function errorCallback(response) {
+//  });
+//});

@@ -1,10 +1,14 @@
 jaqApp.controller('yourpostsCtrl', function($scope, $http) {
 $http({
   method: 'GET',
-  url: 'http://localhost:8080/getPosts'
+  url: 'http://localhost:8080/users/posts'
     //change the userID depending on signed in user
     }).then(function successCallback(response) {
-    $scope.posts=response.data
+    
+    console.log("yourpostctrl", response)
+    $scope.posts = response.data
   }, function errorCallback(response) {
-  }); 
+  });
+  
+
 });
