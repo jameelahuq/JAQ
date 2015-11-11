@@ -11,6 +11,9 @@ var users = require('./routes/users');
 var app = express();
 var config = require('./config/config');
 
+// Database connection
+require('mongoose').connect(config.MONGO_URL);
+
 // Passport dependencies
 var passport = require('passport');
 var flash    = require('connect-flash');
