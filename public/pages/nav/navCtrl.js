@@ -2,17 +2,19 @@ jaqApp.controller('navCtrl', function($scope, $http) {
   $scope.login = function(){
     $http({
       method: 'GET',
-      url: 'http://localhost:8080/auth/google'
+      url: 'http://localhost:8080/profile'
     }).then(function successCallback(response) {
       console.log(response)
     }, function errorCallback(response) {
       console.log("fail", response)
     });
   } 
-  
-  console.log("inside");
+
+  $scope.login();
+
+  console.log("inside navCtrl");
   $scope.addPost = function(post){
-  console.log(post);  
+  //console.log(post);
   
   $http({
   method: 'POST',

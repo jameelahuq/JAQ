@@ -1,4 +1,4 @@
- var express = require('express');
+var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -34,10 +34,6 @@ app.use(corsMiddleware);
 // jameelas stuff ends //
 
 
-
-
-
-
 // Database connection
 var mongoose=require('mongoose')
 .connect(config.MONGO_URL);
@@ -57,7 +53,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // required for passport jameelas stuff continues
-app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
+app.use(session({ secret: config.SECRET })); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session

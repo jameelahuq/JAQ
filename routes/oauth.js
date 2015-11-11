@@ -23,7 +23,7 @@ module.exports = function(app, passport) {
   // route for showing the profile page
   app.get('/profile', isLoggedIn, function(req, res) {
     console.log("retrieving user credentials");
-    res.send(req.user);
+    res.send(req.body);
 
     //TODO: this page will be frontend
     //res.render('profile.ejs', {
@@ -55,7 +55,7 @@ module.exports = function(app, passport) {
       passport.authenticate('google', {
         //TODO: so this redirect will go to the frontpage
         //successRedirect: ,
-        successRedirect : '/#/profile',
+        successRedirect : '/profile/#/',
         failureRedirect : '/'
       }));
 
@@ -68,7 +68,7 @@ module.exports = function(app, passport) {
   // handle the callback after twitter has authenticated the user
   app.get('/auth/twitter/callback',
       passport.authenticate('twitter', {
-        successRedirect : '/#/profile#',
+        successRedirect : '/#/profile',
         failureRedirect : '/'
       }));
 };
