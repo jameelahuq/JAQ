@@ -13,7 +13,6 @@ router.get('/getPosts',function (req,res){
   })
 });
 
-
 // Add a new post and push that posts reference into
 // the users "posts" array
 router.post('/addPost', function(req,res){
@@ -38,7 +37,6 @@ router.post('/addPost', function(req,res){
   })
 })
 
-
 // Like a post
 router.post('/likedPost/:liked', function(req,res){
   Post.findById(req.params.liked,function(err,postLiked){
@@ -48,7 +46,6 @@ router.post('/likedPost/:liked', function(req,res){
     })
   });
 })
-
 
 // Delete a post
 router.delete('/removePost/:postId/:userId', function(req,res){

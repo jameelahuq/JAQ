@@ -29,4 +29,14 @@ router.get('/users/:userId/:field',function(req,res){
   })
 })
 
+
+// Return every user with their posts populated
+router.get('/everything',function(req,res){
+  User.find({})
+  .populate("posts")
+    .exec(function (err, data){
+    err ? res.status(401).send(err) : res.send(data)
+  })
+})
+
 module.exports = router;

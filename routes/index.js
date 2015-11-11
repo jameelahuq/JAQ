@@ -10,7 +10,6 @@ var Post = require('../models/postSchema');
 var Comment = require('../models/commentSchema');
 var User = require('../models/userSchema');
 
-
 // Like a comment. Increments the comments likes by 1
 router.post('/likedComment/:liked', function(req,res){
   Comment.findById(req.params.liked,function(err,commentLiked){
@@ -20,7 +19,6 @@ router.post('/likedComment/:liked', function(req,res){
     })
   });
 })
-
 
 // Remove a comment. Only the user can do this
 router.delete('/removeComment/:commentId/:userId', function(req,res){
@@ -34,7 +32,6 @@ router.delete('/removeComment/:commentId/:userId', function(req,res){
     }
   })
 })
-
 
 // Add a comment. This will put a reference to the comment in the user's and
 // post's "comments" arrays.
@@ -83,6 +80,5 @@ router.get('/submit/:mail', function(req,res) {
   });
 
 });
-
 
 module.exports = router;
