@@ -1,3 +1,5 @@
+"use strict";
+
 jaqApp.controller('tagsCtrl', function($scope, $http) {
 
   let api = constants.siteUrl;
