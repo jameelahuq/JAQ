@@ -17,10 +17,6 @@ var flash    = require('connect-flash');
 var session  = require('express-session');
 require('./config/passport')(passport); // pass passport for configuration
 
-// Database connection
-var mongoose = require('mongoose')
-.connect(config.MONGO_URL);
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');

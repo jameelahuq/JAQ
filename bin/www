@@ -8,11 +8,14 @@ var app = require('../app');
 var debug = require('debug')('JAQ:server');
 var http = require('http');
 
+// Database connection
+require('mongoose').connect(config.MONGO_URL);
+
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '8080');
+var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 /**
