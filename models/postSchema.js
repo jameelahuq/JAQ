@@ -9,7 +9,6 @@ var posts = new mongoose.Schema({
   title: {type: String, required:true},
   tags:[String]
 })
-
 posts.methods.likeIt = function(){
   this.likes ++
 }

@@ -8,22 +8,35 @@ module.exports = function(app, passport) {
     res.render('index', {user: req.user}); // load the index.ejs file
   });
 
-  // route for login form
-  // route for processing the login form
-  // process the signup form
-  //TODO: make your post request
-  //app.post('/signup', passport.authenticate('local-signup', {
-  //  successRedirect : '/profile', // redirect to the secure profile section
-  //  failureRedirect : '/signup', // redirect back to the signup page if there is an error
-  //  failureFlash : true // allow flash messages
-  //}));
+  //
+  //router.get('/', function(req, res){
+  //  Car.find(function(err, cars){
+  //    var data = {
+  //      allCars : cars,
+  //    };
+  //    if (req.user) {
+  //      data.currentUserName = req.user.displayName;
+  //    }
+  //    res.json(data);
+  //  });
+  //});
 
-  // route for processing the signup form
+  app.get('/userdata', isLoggedIn, function(req, res) {
+    console.log("retrieving user credentials");
+    var data = req.user;
+    res.json(data);
+
+    //TODO: this page will be frontend
+    //res.render('profile.ejs', {
+    //  user : req.user // get the user out of session and pass to template
+    //});
+  });
 
   // route for showing the profile page
   app.get('/profile', isLoggedIn, function(req, res) {
     console.log("retrieving user credentials");
-    res.send(req.body);
+    var data = req.user;
+    res.json(data);
 
     //TODO: this page will be frontend
     //res.render('profile.ejs', {
