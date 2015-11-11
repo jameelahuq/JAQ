@@ -100,6 +100,14 @@ router.post('/likedComment/:liked', function(req,res){
   });
 })
 
+router.get('/comments/:postId',function(req,res){
+  Post.findById(req.params.postId)
+    .populate('comments')
+    .exec(function (err, data){
+    err ? res.status(401).send(err) : res.send(data.comments)
+  })
+})
+
 router.delete('/removeComment/:commentId/:userId', function(req,res){
 //   Comment.pre('remove', function(next) {
 //     // Remove all the assignment docs that reference the removed person.
@@ -139,6 +147,8 @@ router.post('/addComment/:postId/:userId', function(req, res){
 
 
 
+
+
 /////////EXPERIMENT//////
 
 
@@ -162,6 +172,14 @@ router.post('/follow/:followersId/:toFollowId', function(req,res){
       if(err) res.send(err);
       res.send(result);
     })
+  })
+})
+
+router.get('/users/:userId/:field',function(req,res){
+  User.findById(req.params.userId)
+    .populate(req.params.field)
+    .exec(function (err, data){
+    err ? res.status(401).send(err) : res.send(data[req.params.field])
   })
 })
 
