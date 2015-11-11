@@ -6,8 +6,8 @@ var user = new mongoose.Schema({
   // name: {type: String, required: true},
   posts: [{type: mongoose.Schema.ObjectId, ref:'Posts'}],
   comments:[{type: mongoose.Schema.ObjectId, ref: 'Comments'}],
-  following:[{type: mongoose.Schema.ObjectId, ref: 'Users'}],
-  followers:[{type: mongoose.Schema.ObjectId, ref: 'Users'}],
+  following:[{type: mongoose.Schema.ObjectId, ref: 'User'}],
+  followers:[{type: mongoose.Schema.ObjectId, ref: 'User'}],
   google           : {
     id           : String,
     token        : String,
@@ -15,9 +15,6 @@ var user = new mongoose.Schema({
     name         : String
   }
 });
-
-
-
 
 
 user.methods.generateHash = function(password) {
