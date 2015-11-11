@@ -36,7 +36,7 @@ app.use(corsMiddleware);
 
 // Database connection
 var mongoose=require('mongoose')
-.connect(config.MONGO_URL);
+.connect(config.MONGOLAB_URI);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
