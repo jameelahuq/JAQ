@@ -24,9 +24,9 @@ router.get('/getPosts', function(req,res){
   })
 });
 
-router.post('/addPost/:authorId', function(req,res){
+router.post('/addPost', function(req,res){
   Post.create({
-    author: req.params.authorId,
+    author: req.user._id,
     thePost:req.body.thePost,
     likes: req.body.likes,
     comments: req.body.comments,
@@ -36,7 +36,7 @@ router.post('/addPost/:authorId', function(req,res){
     if (err){
       res.send(err)
     } 
-    User.findByIdAndUpdate(req.params.authorId ,{$push:{
+    User.findByIdAndUpdate(req.user._id ,{$push:{
       'posts':data._id}
     }, function(err,user){
       if(err) res.send(err);
@@ -88,6 +88,14 @@ router.post('/findByTag',function (req,res){
     }
   })
 })
+
+//router.get('/oath/users', function(req, res){
+//  User.findById(req.user._id).populate('posts').exec(function(err, user){
+//    res.json(user);
+//  });
+//});
+
+
 
 // comment routes \\
 
@@ -175,8 +183,10 @@ router.post('/follow/:followersId/:toFollowId', function(req,res){
   })
 })
 
-router.get('/users/:userId/:field',function(req,res){
-  User.findById(req.params.userId)
+
+
+router.get('/users/:field',function(req,res){
+  User.findById(req.user._id)
     .populate(req.params.field)
     .exec(function (err, data){
     err ? res.status(401).send(err) : res.send(data[req.params.field])
