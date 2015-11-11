@@ -11,5 +11,8 @@ var comments = new mongoose.Schema({
 comments.methods.likeIt = function(){
   this.likes ++
 }
+comments.methods.dislikeIt = function(){
+  this.likes --
+}
 
 module.exports = mongoose.model('Comments', comments);

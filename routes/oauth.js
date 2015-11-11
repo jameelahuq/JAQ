@@ -55,7 +55,7 @@ module.exports = function(app, passport) {
       passport.authenticate('google', {
         //TODO: so this redirect will go to the frontpage
         //successRedirect: ,
-        successRedirect : '/profile',
+        successRedirect : '/#/profile',
         failureRedirect : '/'
       }));
 
@@ -68,10 +68,9 @@ module.exports = function(app, passport) {
   // handle the callback after twitter has authenticated the user
   app.get('/auth/twitter/callback',
       passport.authenticate('twitter', {
-        successRedirect : '/profile',
+        successRedirect : '/#/profile#',
         failureRedirect : '/'
       }));
-
 };
 
 // route middleware to make sure a user is logged in

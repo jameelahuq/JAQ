@@ -4,3 +4,17 @@
 .morelink {
     display: block;
 }
+
+.hidden{
+    display:none;
+}
+
+.checkbox-container{
+    list-style:none;
+    background:#f5f5f5;
+    padding:10px;
+    margin-left:20px;
+}
+.postBody { width: 1300px; height: 500px 
+
+ 

@@ -29,7 +29,8 @@ router.post('/addPost/:authorId', function(req,res){
     thePost:req.body.thePost,
     likes: req.body.likes,
     comments: req.body.comments,
-    title: req.body.title
+    title: req.body.title,
+    tags:req.body.tags
   }, function(err,data){
     if (err){
       res.send(err)
@@ -134,6 +135,9 @@ router.post('/addComment/:postId/:userId', function(req, res){
     res.send(comment)
   }) 
 })
+
+
+
 /////////EXPERIMENT//////
 
 
@@ -147,6 +151,18 @@ router.post('/addComment/:postId/:userId', function(req, res){
 //       res.send(user);
 //   })
 // })
+router.post('/follow/:followersId/:toFollowId', function(req,res){
+  User.findByIdAndUpdate(req.params.followersId,{$push:{
+    'following':req.params.toFollowId}
+  }, function(err,data){
+    User.findByIdAndUpdate(req.params.toFollowId, {$push:{
+      'followers': data._id}
+    }, function(err,result){
+      if(err) res.send(err);
+      res.send(result);
+    })
+  })
+})
 
 router.get('/submit/:mail', function(req,res) {
     var mailgun = new Mailgun({
@@ -157,8 +173,8 @@ router.get('/submit/:mail', function(req,res) {
     var data = {
       from: 'JAQd@blogs.com',
       to: req.params.mail, 
-      subject: 'Hello from Mailgun',
-      html: 'This is pretty cool'
+      subject: "Hello from JAQ'd",
+      html: 'Somebody has commented on your post.'
     }
     mailgun.messages().send(data, function (err, body) {
         if (err) {
