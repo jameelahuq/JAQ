@@ -5,7 +5,7 @@ module.exports = function(app, passport) {
   // route for home page
   //TODO: go to our frontend page
   app.get('/', function(req, res) {
-    res.render('index.ejs'); // load the index.ejs file
+    res.render('index', {user: req.user}); // load the index.ejs file
   });
 
   // route for login form
