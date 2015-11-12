@@ -21,7 +21,7 @@
                         <input id="commentText" type="text" placeholder="Respond Nicely" ng-model="comment.text"><a class="button radius tiny" ng-click="addComment(comment); clearField()">Send</a>
                     </div>
                 </div>
-                <div class="comment medium-12 columns"><a class="button radius tiny" value="Toggle First = {{box1}}" ng-click="box1=!box1; getComments(post._id);">Comments {{button}}</a>&nbsp; &nbsp; <a class="button radius tiny" ng-click="like(post._id)">{{liked}}</a>
+                <div class="comment medium-12 columns"><a class="button radius tiny" value="Toggle First = {{box1}}" ng-click="box1=!box1; getComments(post._id);">{{post.comments.length}} Comments {{button}}</a>&nbsp; &nbsp; <a class="button radius tiny" ng-click="like(post._id)">{{liked}}</a>
                     <p>Likes: {{post.likes}}</p>
                 </div>
 

@@ -1,13 +1,11 @@
 "use strict";
 
-jaqApp.controller('navCtrl', function ($scope, $http, constants) {
-
-  let api = constants.siteUrl;
+jaqApp.controller('navCtrl', function ($scope, $http) {
 
   $scope.post = function () {
     $http({
       method: 'GET',
-      url: api + '/users/posts'
+      url: '/users/posts'
     }).then(function successCallback(response) {
       $('.js-checkbox-container').slideToggle(400);
     }, function errorCallback(response) {
@@ -31,7 +29,7 @@ jaqApp.controller('navCtrl', function ($scope, $http, constants) {
   var get = function () {
     $http({
       method: 'GET',
-      url: api + '/users/posts'
+      url: '/users/posts'
     }).then(function successCallback(response) {
       $scope.inButton = false;
       $scope.outButton = true;
@@ -50,7 +48,7 @@ jaqApp.controller('navCtrl', function ($scope, $http, constants) {
     $http({
       method: 'POST',
       data: post,
-      url: api + '/posts/addPost'
+      url: '/posts/addPost'
 
     }).then(function successCallback(response) {
       console.log(response)

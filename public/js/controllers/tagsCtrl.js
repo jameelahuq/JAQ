@@ -1,17 +1,16 @@
 "use strict";
 
-jaqApp.controller('tagsCtrl', function($scope, $http, constants) {
-
-  let api = constants.siteUrl;
+jaqApp.controller('tagsCtrl', function($scope, $http) {
 
   $http({
     method: 'GET',
-    url: api + '/users/posts'
+    url: '/users/posts'
       //change the userID depending on signed in user
       }).then(function successCallback(response) {
       console.log("yourpostctrl", response)
       $scope.posts = response.data
-    }, function errorCallback(response) {
+    }, function errorCallback(err) {
+    console.log(err);
     });
 });
 

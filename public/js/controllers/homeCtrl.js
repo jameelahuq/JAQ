@@ -1,7 +1,6 @@
 'use strict';
-jaqApp.controller('homeCtrl', function ($scope, $http, constants) {
-  
-     let api = constants.siteUrl;
+
+jaqApp.controller('homeCtrl', function ($scope, $http) {
 
       var executed = false;
       $(window).scroll(function() {   
@@ -30,7 +29,7 @@ jaqApp.controller('homeCtrl', function ($scope, $http, constants) {
   var get = function () {
     $http({
       method: 'GET',
-      url: api + '/users/posts'
+      url: '/users/posts'
         //change the userID depending on signed in user
     }).then(function successCallback(response) {
       $scope.signedIn = true;
@@ -42,11 +41,11 @@ jaqApp.controller('homeCtrl', function ($scope, $http, constants) {
    $scope.clearField = function () {
      $scope.comment = "";
    }
-   $scope.liked = "Like"
+   $scope.liked = "Like";
    var get = function () {
      $http({
        method: 'GET',
-       url: api +'/everything'
+       url: '/everything'
          //change the userID depending on signed in user
      }).then(function successCallback(response) {
 
@@ -64,18 +63,20 @@ jaqApp.controller('homeCtrl', function ($scope, $http, constants) {
      if ($scope.liked === "Dislike") {
        $http({
          method: 'POST',
-         url: api+'/posts/dislikedPost/' + id
+
+         url: '/posts/dislikedPost/' + id
 
        }).then(function successCallback(response) {
-         $scope.liked = "Like"
+         $scope.liked = "Like";
          get();
        }, function errorCallback(response) {});
      } else {
        $http({
          method: 'POST',
-         url: api+'/posts/likedPost/' + id
+         url: 'posts/likedPost/' + id
+
        }).then(function successCallback(response) {
-         $scope.liked = "Dislike"
+         $scope.liked = "Dislike";
          get();
        }, function errorCallback(response) {});
      }
@@ -84,18 +85,22 @@ jaqApp.controller('homeCtrl', function ($scope, $http, constants) {
    var getComments = function () {
      $scope.getComments = function (id) {
        $http({
+
          method: 'GET',
-         url: api+'/posts/comments/' + id
+         url: 'posts/comments/' + id
+
        }).then(function successCallback(response) {
-         console.log("comments", response)
+
+         console.log("comments", response);
          $scope.comments = response.data.comments
+
        }, function errorCallback(response) {});
        $scope.addComment = function (comment) {
-         var comment = comment
+         var comment = comment;
          $http({
            method: 'POST',
            data: comment,
-           url: api+'/comments/addComment/' + id
+           url: 'comments/addComment/' + id
          }).then(function successCallback(response) {
            $scope.getComments(id)
          }, function errorCallback(response) {
