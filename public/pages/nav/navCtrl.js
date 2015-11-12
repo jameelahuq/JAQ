@@ -1,3 +1,5 @@
+"use strict";
+
 jaqApp.controller('navCtrl', function ($scope, $http, constants) {
 
   let api = constants.siteUrl;
