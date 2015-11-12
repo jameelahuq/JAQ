@@ -4,7 +4,7 @@ jaqApp.controller('homeCtrl', function ($scope, $http, constants) {
    let api = constants.siteUrl;
    //   $http({
    //       method: 'POST',
-   //         url: 'http://localhost:8080/id'
+   //         url: api + '/id'
    //       }).then(function successCallback(response) {
    //         console.log("id", response)
    //       }, function errorCallback(response) {});
@@ -16,7 +16,7 @@ jaqApp.controller('homeCtrl', function ($scope, $http, constants) {
    var get = function () {
      $http({
        method: 'GET',
-       url: api+'/everything'
+       url: api +'/everything'
          //change the userID depending on signed in user
      }).then(function successCallback(response) {
        //       console.log("woo[", response.data[0])

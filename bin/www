@@ -12,6 +12,7 @@ var http = require('http');
  * Get port from environment and store in Express.
  */
 
+// process.env.PORT lets the port be set by Heroku
 var port = normalizePort(process.env.PORT || '8080');
 app.set('port', port);
 
