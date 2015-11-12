@@ -22,6 +22,28 @@ router.get('/getPosts', function (req, res) {
   })
 });
 
+
+// Get a specific post by id
+router.get('/:postId', function(req,res){
+  Post.findById(req.params.postId,{
+  }, function(err,result){
+      res.send(result);
+  })
+})
+
+// This will update just the fields of the specified post
+// that have changed
+router.post('/edit/:postId', function(req,res){
+  Post.findByIdAndUpdate(req.params.postId,{
+    $set: req.body, function(err,data){
+      console.log(data)
+    }
+  }, function(err,result){
+      res.send(result);
+    
+  })
+})
+
 // Adds a post. Pushes the id of itself into the authors "posts" array.
 router.post('/addPost', function (req, res) {
   Post.create({
