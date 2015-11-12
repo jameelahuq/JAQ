@@ -1,4 +1,4 @@
-//jaqApp.controller('followersCtrl', function($scope, $http) {
+jaqApp.controller('followersCtrl', function($scope, $http) {
 //$http({
 //  method: 'GET',
 //  url: 'http://localhost:8080/users/posts'
@@ -8,4 +8,4 @@
 //    $scope.posts = response.data
 //  }, function errorCallback(response) {
 //  });
-//});
+});

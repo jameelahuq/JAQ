@@ -1,5 +1,9 @@
 var jaqApp = angular.module('jaqApp', ['ui.router'])
 
+jaqApp.constant('constants', {
+    //siteUrl: 'https://jaqd.herokuapp.com'
+  siteUrl: 'http://localhost:8080'
+});
 jaqApp.config(function ($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state('home', {
@@ -47,11 +51,7 @@ jaqApp.config(function ($stateProvider, $urlRouterProvider) {
     })
 
   $urlRouterProvider.otherwise('home')
-});
-
-
-
-
+})
 jaqApp.directive('readMore', function () {
   return {
     restrict: 'AE',

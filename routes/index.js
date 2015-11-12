@@ -118,6 +118,21 @@ router.post('/findByTag', function (req, res) {
   })
 })
 
+router.get('/users/id',function(req,res){
+  User.findById(req.user._id)
+      .exec(function (err, data){
+        err ? res.status(401).send(err) : res.send(data)
+      })
+})
+router.get('/users/:field',function(req,res){
+  User.findById(req.user._id)
+      .populate(req.params.field)
+      .exec(function (err, data){
+        err ? res.status(401).send(err) : res.send(data[req.params.field])
+      })
+})
+
+
 //router.get('/oath/users', function(req, res){
 //  User.findById(req.user._id).populate('posts').exec(function(err, user){
 //    res.json(user);
@@ -247,22 +262,6 @@ router.post('/follow/:followersId/:toFollowId', function (req, res) {
   })
 })
 
-
-
-router.get('/users/:field', function (req, res) {
-  User.findById(req.user._id)
-    .populate(req.params.field)
-    .exec(function (err, data) {
-      err ? res.status(401).send(err) : res.send(data[req.params.field])
-    })
-})
-
-router.get('/user/id', function (req, res) {
-  User.findById(req.user._id)
-    .exec(function (err, data) {
-      err ? res.status(401).send(err) : res.send(data)
-    })
-})
 
 router.get('/everything', function (req, res) {
   User.find({})

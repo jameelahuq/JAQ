@@ -1,4 +1,7 @@
- jaqApp.controller('homeCtrl', function ($scope, $http) {
+'use strict';
+jaqApp.controller('homeCtrl', function ($scope, $http, constants) {
+   
+   let api = constants.siteUrl;
    //   $http({
    //       method: 'POST',
    //         url: 'http://localhost:8080/id'
@@ -13,7 +16,7 @@
    var get = function () {
      $http({
        method: 'GET',
-       url: 'http://localhost:8080/everything'
+       url: api+'/everything'
          //change the userID depending on signed in user
      }).then(function successCallback(response) {
        //       console.log("woo[", response.data[0])
@@ -32,7 +35,7 @@
      if ($scope.liked === "Dislike") {
        $http({
          method: 'POST',
-         url: 'http://localhost:8080/dislikedPost/' + id
+         url: api+'/dislikedPost/' + id
 
        }).then(function successCallback(response) {
          $scope.liked = "Like"
@@ -41,7 +44,7 @@
      } else {
        $http({
          method: 'POST',
-         url: 'http://localhost:8080/likedPost/' + id
+         url: api+'/likedPost/' + id
        }).then(function successCallback(response) {
          $scope.liked = "Dislike"
          get();
@@ -53,7 +56,7 @@
      $scope.getComments = function (id) {
        $http({
          method: 'GET',
-         url: 'http://localhost:8080/comments/' + id
+         url: api+'/comments/' + id
        }).then(function successCallback(response) {
          console.log("comments", response)
          $scope.comments = response.data.comments
@@ -63,7 +66,7 @@
          $http({
            method: 'POST',
            data: comment,
-           url: 'http://localhost:8080/addComment/' + id
+           url: api+'/addComment/' + id
          }).then(function successCallback(response) {
            $scope.getComments(id)
          }, function errorCallback(response) {

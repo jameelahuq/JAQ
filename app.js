@@ -11,32 +11,14 @@ var users = require('./routes/users');
 var app = express();
 var config = require('./config/config');
 
+// Database connection
+require('mongoose').connect(config.MONGO_URL);
 
-
-
-//jameelas stuff
+// Passport dependencies
 var passport = require('passport');
 var flash    = require('connect-flash');
-var session      = require('express-session');
-var debug = require('debug')('JAQ:server');
+var session  = require('express-session');
 require('./config/passport')(passport); // pass passport for configuration
-
-//allow cross-origin requests
-var corsMiddleware = function(req, res, next) {
-  console.log("middleware initiated");
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Cache-Control, Pragma, Origin, Authorization, Content-Type, X-Requested-With");
-  res.header("Access-Control-Allow-Methods", "GET, PUT, POST");
-  next();
-};
-
-app.use(corsMiddleware);
-// jameelas stuff ends //
-
-
-// Database connection
-var mongoose=require('mongoose')
-.connect(config.MONGO_URL);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
