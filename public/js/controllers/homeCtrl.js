@@ -2,13 +2,42 @@
 
 jaqApp.controller('homeCtrl', function ($scope, $http) {
 
-   //   $http({
-   //       method: 'POST',
-   //         url: '/id'
-   //       }).then(function successCallback(response) {
-   //         console.log("id", response)
-   //       }, function errorCallback(response) {});
+      var executed = false;
+      $(window).scroll(function() {   
+        if($(window).scrollTop() + $(window).height() > $(document).height() / 2 && executed === false && $scope.signedIn !== true) {
+          executed = true;
+          swal({   title: "Sign in or Continue Reading?",   text: "Sign in to share your opinion!",   showCancelButton: true, cancelButtonText:"Keep Reading",  imageUrl: "http://image1.spreadshirtmedia.net/image-server/v1/compositions/22970831/views/1,width=235,height=235,appearanceId=1,backgroundColor=f9f9f9,version=1440399755/smiley-T-shirts.jpg", confirmButtonColor: "#00bb66",   confirmButtonText: "Yes, sign in!",   closeOnConfirm: false }, function(){
+            
+            swal("Awesome!", "You're signed in!", "success"); 
+            window.location="/auth/google"
+          });
+        }
+      });
+      
+      var something = (function() {
+        var executed = false;
+        return function () {
+          if (!executed) {
+            executed = true;
+            // do something
+          }
+        };
+      })();
+  
 
+
+  var get = function () {
+    $http({
+      method: 'GET',
+      url: '/users/posts'
+        //change the userID depending on signed in user
+    }).then(function successCallback(response) {
+      $scope.signedIn = true;
+      console.log("you good")
+    }, function errorCallback(response) {});
+  }
+  get();
+  
    $scope.clearField = function () {
      $scope.comment = "";
    }
@@ -19,32 +48,33 @@ jaqApp.controller('homeCtrl', function ($scope, $http) {
        url: '/everything'
          //change the userID depending on signed in user
      }).then(function successCallback(response) {
-       //       console.log("woo[", response.data[0])
-       //      $scope.posts = []
-       //       for(var i=0; i<response.data.length; i++){
-       //         for(var j=0; j<response.data[i].posts.length; j++){
-       //           $scope.posts.push(response.data[i].posts[j].thePost);
-       //         }
-       //       }
+
+      console.log(response);
+
        $scope.data = response.data;
-     }, function errorCallback(response) {});
+     }, function errorCallback(response) {
+      console.log(response)
+     });
    }
    get();
 
    $scope.like = function (id) {
+     
      if ($scope.liked === "Dislike") {
        $http({
          method: 'POST',
-         url: '/dislikedPost/' + id
+
+         url: '/posts/dislikedPost/' + id
 
        }).then(function successCallback(response) {
-         $scope.liked = "Like"
+         $scope.liked = "Like";
          get();
        }, function errorCallback(response) {});
      } else {
        $http({
          method: 'POST',
-         url: '/likedPost/' + id
+         url: 'posts/likedPost/' + id
+
        }).then(function successCallback(response) {
          $scope.liked = "Dislike";
          get();
@@ -55,18 +85,22 @@ jaqApp.controller('homeCtrl', function ($scope, $http) {
    var getComments = function () {
      $scope.getComments = function (id) {
        $http({
+
          method: 'GET',
-         url: '/comments/' + id
+         url: 'posts/comments/' + id
+
        }).then(function successCallback(response) {
-         console.log("comments", response)
+
+         console.log("comments", response);
          $scope.comments = response.data.comments
+
        }, function errorCallback(response) {});
        $scope.addComment = function (comment) {
-         var comment = comment
+         var comment = comment;
          $http({
            method: 'POST',
            data: comment,
-           url: '/addComment/' + id
+           url: 'comments/addComment/' + id
          }).then(function successCallback(response) {
            $scope.getComments(id)
          }, function errorCallback(response) {

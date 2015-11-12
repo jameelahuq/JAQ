@@ -5,8 +5,10 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var routes = require('./routes/index');
+var posts = require('./routes/posts');
+var index = require('./routes/index');
 var users = require('./routes/users');
+var comments = require('./routes/comments');
 
 var app = express();
 var config = require('./config/config');
@@ -51,11 +53,10 @@ app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 require('./routes/oauth.js')(app, passport); //
 
-
-
-
-app.use('/', routes);
+app.use('/', index);
+app.use('/posts', posts);
 app.use('/users', users);
+app.use('/comments', comments);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

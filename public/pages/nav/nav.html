@@ -1,62 +1,65 @@
 <div ng-controller="navCtrl">
-  <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
-    <ul class="title-area">
-      <li class="name">
-        <h1><a href="#/home">JAQ'd</a></h1>
-      </li>
+    <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+        <ul class="title-area">
+            <li class="name">
+                <h1><a href="#/home">JAQ'd</a></h1>
+            </li>
 
-      <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-      <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
-    </ul>
+            <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+            <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a>
+            </li>
+        </ul>
 
-    <section class="top-bar-section">
-      <!-- Right Nav Section -->
-      <ul class="left">
-        <li class="has-form">
-          <div class="row collapse">
-            <div class="large-8 small-9 columns">
-              <input type="text" placeholder="Find Blogs">
-            </div>
-            <div class="large-4 small-3 columns">
-              <a href="#search" class="alert button expand"><i class="fa fa-search"></i></a>
-            </div>
-          </div>
-        </li>
-      </ul>
-      <ul class="right">
-        <li><a href="#home">Feed  <i class="fa fa-home fa-lg"></i></a></li>
-        <li><a href="#profile">Profile  <i class="fa fa-user fa-lg"></i></a></li>
-        <li><a class="js-mo">Post  <i class="fa fa-plus-square-o fa-lg"></i></a></li>
-        <li><a class="btn btn-danger" href="/auth/google"><span class="fa fa-google-plus"></span>Sign In</a></li>
-      </ul>
-    </section>
-  </nav>
+        <section class="top-bar-section">
+            <!-- Right Nav Section -->
+            <ul class="left">
+                <li class="has-form">
+                    <div class="row collapse">
+                        <div class="large-8 small-9 columns">
+                            <input type="text" placeholder="Find Blogs">
+                        </div>
+                        <div class="large-4 small-3 columns">
+                            <a href="#search" class="alert button expand"><i class="fa fa-search"></i></a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <ul class="right">
+                <li><a href="#home">Feed  <i class="fa fa-home fa-lg"></i></a>
+                </li>
+                <li><a href="#profile" ng-show="outButton">Profile  <i class="fa fa-user fa-lg"></i></a>
+                </li>
+                <li><a ng-click="post()">Post  <i class="fa fa-plus-square-o fa-lg"></i></a>
+                </li>
+                <li ng-show="inButton"><a class="btn btn-danger" href="/auth/google"><span class="fa fa-google-plus"></span>Sign In</a>
+                </li>
+                <li ng-show="outButton"><a class="btn btn-danger" href="/logout"><span class="fa fa-google-plus"></span>Sign Out</a>
+                </li>
+            </ul>
+        </section>
+    </nav>
 
-  <div id="main">
-    <div class="hidden js-checkbox-container hidden checkbox-container">
-      <form action="">
-        <input type="text" placeholder="Blog Title" ng-model="post.title">
-        <textarea class="postBody" placeholder={{message}} ng-model="post.thePost"></textarea>
-        <div class="row">
-          <div class="medium-8 columns">
-            <input type="text" placeholder="Tags" ng-model="post.tags">
-          </div>
-          <div class="medium-4 columns"><a class="button radius tiny js-mo" ng-click="addPost(post)"><i class="fa fa-paper-plane-o fa-lg"></i></a></div>
+    <div id="main">
+        <div class="hidden js-checkbox-container hidden checkbox-container">
+            <form action="">
+                <input type="text" placeholder="Blog Title" ng-model="post.title">
+                <textarea class="postBody" placeholder={{message}} ng-model="post.thePost"></textarea>
+                <div class="row">
+                    <div class="medium-8 columns">
+                        <input type="text" placeholder="Tags" ng-model="post.tags">
+                    </div>
+                    <div class="medium-4 columns"><a class="button radius tiny js-mo" ng-click="addPost(post)"><i class="fa fa-paper-plane-o fa-lg"></i></a>
+                    </div>
+                </div>
+            </form>
         </div>
-      </form>
+
     </div>
 
-  </div>
-
-  <script>
-    $(function () {
-      $('.js-mo').on('click', function (e) {
-        $('.js-checkbox-container').slideToggle(400);
-      });
-    });
-  </script>
+    <script>
+    </script>
 
 
 
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>

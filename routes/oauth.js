@@ -72,7 +72,7 @@ module.exports = function (app, passport) {
     passport.authenticate('google', {
       //TODO: so this redirect will go to the frontpage
       //successRedirect: ,
-      successRedirect: '/#/profile',
+      successRedirect: '/#/home',
       failureRedirect: '/'
     }));
 
