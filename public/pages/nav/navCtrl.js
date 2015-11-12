@@ -24,7 +24,7 @@ jaqApp.controller('navCtrl', function ($scope, $http, constants) {
     $http({
       method: 'POST',
       data: post,
-      url: api + '/addPost'
+      url: api + '/posts/addPost'
 
     }).then(function successCallback(response) {
       console.log(response)
