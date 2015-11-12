@@ -23,6 +23,16 @@ router.get('/:field',function(req,res){
       })
 });
 
+
+// This route will return a user with their "posts" field populated
+router.get('/profile/:userId',function(req,res){
+  User.findById(req.params.userId)
+      .populate('posts')
+      .exec(function (err, data){
+        err ? res.status(401).send(err) : res.send(data)
+      })
+});
+
 // This will add the user to the "follower" array of another user, and add
 // the followed user to the "followed" array of the follower.
 router.post('/follow/:followersId/:toFollowId', function (req, res) {
