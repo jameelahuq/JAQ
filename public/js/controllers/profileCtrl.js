@@ -6,7 +6,7 @@ jaqApp.controller('profileCtrl', function ($scope, $http, $window, md5, constant
 
   $http({
     method: 'GET',
-    url: api + '/users/id'
+    url: '/users/id'
       //change the userID depending on signed in user
   }).then(function successCallback(response) {
     $scope.author = response.data.google.name || "Guest" ;

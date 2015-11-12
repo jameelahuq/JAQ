@@ -16,7 +16,7 @@ jaqApp.controller('homeCtrl', function ($scope, $http, constants) {
    var get = function () {
      $http({
        method: 'GET',
-       url: api +'/everything'
+       url: '/everything'
          //change the userID depending on signed in user
      }).then(function successCallback(response) {
        //       console.log("woo[", response.data[0])
@@ -35,7 +35,7 @@ jaqApp.controller('homeCtrl', function ($scope, $http, constants) {
      if ($scope.liked === "Dislike") {
        $http({
          method: 'POST',
-         url: api+'/dislikedPost/' + id
+         url: '/dislikedPost/' + id
 
        }).then(function successCallback(response) {
          $scope.liked = "Like"
@@ -44,7 +44,7 @@ jaqApp.controller('homeCtrl', function ($scope, $http, constants) {
      } else {
        $http({
          method: 'POST',
-         url: api+'/likedPost/' + id
+         url: '/likedPost/' + id
        }).then(function successCallback(response) {
          $scope.liked = "Dislike"
          get();
@@ -56,7 +56,7 @@ jaqApp.controller('homeCtrl', function ($scope, $http, constants) {
      $scope.getComments = function (id) {
        $http({
          method: 'GET',
-         url: api+'/comments/' + id
+         url: '/comments/' + id
        }).then(function successCallback(response) {
          console.log("comments", response)
          $scope.comments = response.data.comments
@@ -66,7 +66,7 @@ jaqApp.controller('homeCtrl', function ($scope, $http, constants) {
          $http({
            method: 'POST',
            data: comment,
-           url: api+'/addComment/' + id
+           url: '/addComment/' + id
          }).then(function successCallback(response) {
            $scope.getComments(id)
          }, function errorCallback(response) {

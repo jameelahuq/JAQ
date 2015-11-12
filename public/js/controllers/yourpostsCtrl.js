@@ -1,10 +1,10 @@
 'use strict';
-jaqApp.controller('yourpostsCtrl', function ($scope, $http, constants) {
-  let api = constants.siteUrl;
+jaqApp.controller('yourpostsCtrl', function ($scope, $http) {
+
   var get = function () {
     $http({
       method: 'GET',
-      url: api + '/users/posts'
+      url: '/users/posts'
         //change the userID depending on signed in user
     }).then(function successCallback(response) {
 
@@ -18,7 +18,7 @@ jaqApp.controller('yourpostsCtrl', function ($scope, $http, constants) {
     var id = id;
     $http({
       method: 'DELETE',
-      url: api + '/removePost/' + id
+      url: '/removePost/' + id
         //change the userID depending on signed in user
     }).then(function successCallback(response) {
       get();
