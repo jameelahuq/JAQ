@@ -1,9 +1,11 @@
-var jaqApp = angular.module('jaqApp', ['ui.router'])
+var jaqApp = angular.module('jaqApp', ['ui.router']);
 
 jaqApp.constant('constants', {
-    //siteUrl: 'https://jaqd.herokuapp.com'
-  siteUrl: 'http://localhost:8080'
+// siteUrl: 'https://jaqd.herokuapp.com'
+  siteUrl:  'http://localhost:8080'
+
 });
+
 jaqApp.config(function ($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state('home', {

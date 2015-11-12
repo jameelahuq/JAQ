@@ -9,13 +9,13 @@ router.get('users/:field',function(req,res){
       .exec(function (err, data){
         err ? res.status(401).send(err) : res.send(data[req.params.field])
       })
-})
+});
 
 router.get('/users/id',function(req,res){
   User.findById(req.user._id)
       .exec(function (err, data){
         err ? res.status(401).send(err) : res.send(data)
       })
-})
+});
 
 module.exports = router;

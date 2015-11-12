@@ -1,6 +1,8 @@
 'use strict';
 jaqApp.controller('homeCtrl', function ($scope, $http, constants) {
   
+     let api = constants.siteUrl;
+
       var executed = false;
       $(window).scroll(function() {   
         if($(window).scrollTop() + $(window).height() > $(document).height() / 2 && executed === false && $scope.signedIn !== true) {
@@ -23,7 +25,7 @@ jaqApp.controller('homeCtrl', function ($scope, $http, constants) {
         };
       })();
   
-   let api = constants.siteUrl;
+
 
   var get = function () {
     $http({
@@ -44,7 +46,7 @@ jaqApp.controller('homeCtrl', function ($scope, $http, constants) {
    var get = function () {
      $http({
        method: 'GET',
-       url: api+'/everything'
+       url: api +'/everything'
          //change the userID depending on signed in user
      }).then(function successCallback(response) {
 
