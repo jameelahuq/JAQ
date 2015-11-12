@@ -85,7 +85,7 @@ jaqApp.controller('homeCtrl', function ($scope, $http, constants) {
      $scope.getComments = function (id) {
        $http({
          method: 'GET',
-         url: api+'/comments/' + id
+         url: api+'/posts/comments/' + id
        }).then(function successCallback(response) {
          console.log("comments", response)
          $scope.comments = response.data.comments
