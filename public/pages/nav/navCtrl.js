@@ -1,9 +1,11 @@
-jaqApp.controller('navCtrl', function ($scope, $http) {
+jaqApp.controller('navCtrl', function ($scope, $http, constants) {
+
+  let api = constants.siteUrl;
 
   $scope.login = function () {
     $http({
       method: 'GET',
-      url: 'http://localhost:8080/profile'
+      url: api + '/profile'
     }).then(function successCallback(response) {
       console.log(response)
     }, function errorCallback(response) {
@@ -20,7 +22,7 @@ jaqApp.controller('navCtrl', function ($scope, $http) {
     $http({
       method: 'POST',
       data: post,
-      url: 'http://localhost:8080/addPost'
+      url: api + '/addPost'
 
     }).then(function successCallback(response) {
       console.log(response)
