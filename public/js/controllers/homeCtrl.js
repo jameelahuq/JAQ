@@ -50,8 +50,12 @@ jaqApp.controller('homeCtrl', function ($scope, $http, constants) {
          //change the userID depending on signed in user
      }).then(function successCallback(response) {
 
+      console.log(response);
+
        $scope.data = response.data;
-     }, function errorCallback(response) {});
+     }, function errorCallback(response) {
+      console.log(response)
+     });
    }
    get();
 
@@ -60,7 +64,7 @@ jaqApp.controller('homeCtrl', function ($scope, $http, constants) {
      if ($scope.liked === "Dislike") {
        $http({
          method: 'POST',
-         url: api+'/dislikedPost/' + id
+         url: api+'/posts/dislikedPost/' + id
 
        }).then(function successCallback(response) {
          $scope.liked = "Like"
@@ -69,7 +73,7 @@ jaqApp.controller('homeCtrl', function ($scope, $http, constants) {
      } else {
        $http({
          method: 'POST',
-         url: api+'/likedPost/' + id
+         url: api+'/posts/likedPost/' + id
        }).then(function successCallback(response) {
          $scope.liked = "Dislike"
          get();
@@ -91,7 +95,7 @@ jaqApp.controller('homeCtrl', function ($scope, $http, constants) {
          $http({
            method: 'POST',
            data: comment,
-           url: api+'/addComment/' + id
+           url: api+'/comments/addComment/' + id
          }).then(function successCallback(response) {
            $scope.getComments(id)
          }, function errorCallback(response) {

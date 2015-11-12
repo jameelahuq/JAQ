@@ -41,6 +41,13 @@ jaqApp.controller('yourpostsCtrl', function ($scope, $http, constants) {
       });
 
 
+    $http({
+      method: 'DELETE',
+      url: api + '/posts/removePost/' + id
+        //change the userID depending on signed in user
+    }).then(function successCallback(response) {
+      get();
+
 
   }
   $scope.edit = function (id) {
