@@ -1,102 +1,129 @@
 <div ng-include="'pages/nav/nav.html'"></div>
 <div class="row" ng-controller="homeCtrl">
-  <div class="large-9 columns" role="content">
+    <div class="large-9 columns" role="content">
 
 
 
-    <article class="more" ng-repeat="datum in data track by $index">
-      <div ng-repeat="post in datum.posts track by $index">
-        <h3><a href="#">{{post.title}}</a></h3>
-        <h6>Written by <a href="#/profile/{{datum._id}}">{{datum.google.name}}</a> on {{post.date}}</h6>
-        <p>{{post.thePost}}</p>
-        <div ng-repeat="tag in post.tags track by $index"><p><b>Tags:</b> {{tag}}</p></div>
-        <hr/>
-      </div>
-      
-        
-    </article>
+        <article class="more" ng-repeat="datum in data track by $index">
+            <div ng-repeat="post in datum.posts track by $index">
+                <h3><a href="#">{{post.title}}</a></h3>
+                <h6>Written by <a href="#/profile/{{datum._id}}">{{datum.google.name}}</a> on {{post.date}}</h6>
+                <p>{{post.thePost}}</p>
 
-  </div>
+                <div ng-repeat="tag in post.tags track by $index">
+                    <p><b>Tags:</b> {{tag}}</p>
+                </div>
+                <div class="hidden div1" data-slide-toggle="box1" data-slide-toggle-duration="100">
+                    <div>
+                        <p ng-repeat="comment in comments"><b><a href="#/profile/{{comment.author._id}}">{{comment.author.google.name}}</a></b>: {{comment.text}}</p>
+                    </div>
+                    <div class="medium-12 columns">
+                        <input id="commentText" type="text" placeholder="Respond Nicely" ng-model="comment.text"><a class="button radius tiny" ng-click="addComment(comment); clearField()">Send</a>
+                    </div>
+                </div>
+                <div class="comment medium-12 columns"><a class="button radius tiny" value="Toggle First = {{box1}}" ng-click="box1=!box1; getComments(post._id);">Comments {{button}}</a>&nbsp; &nbsp; <a class="button radius tiny" ng-click="like(post._id)">{{liked}}</a>
+                    <p>Likes: {{post.likes}}</p>
+                </div>
 
 
+                <hr/>
+            </div>
 
-  <aside class="large-3 columns">
+        </article>
 
-    <h5>Categories</h5>
-    <ul class="side-nav">
-      <li><a href="#">News</a></li>
-      <li><a href="#">Code</a></li>
-      <li><a href="#">Design</a></li>
-      <li><a href="#">Fun</a></li>
-      <li><a href="#">Weasels</a></li>
-    </ul>
-
-    <div class="panel">
-      <h5>Featured</h5>
-      <p>Pork drumstick turkey fugiat. Tri-tip elit turducken pork chop in. Swine short ribs meatball irure bacon nulla pork belly cupidatat meatloaf cow.</p>
-      <a href="#">Read More →</a>
     </div>
 
-  </aside>
+
+
+    <aside class="large-3 columns">
+
+        <h5>Categories</h5>
+        <ul class="side-nav">
+            <li><a href="#">News</a>
+            </li>
+            <li><a href="#">Code</a>
+            </li>
+            <li><a href="#">Design</a>
+            </li>
+            <li><a href="#">Fun</a>
+            </li>
+            <li><a href="#">Weasels</a>
+            </li>
+        </ul>
+
+        <div class="panel">
+            <h5>Featured</h5>
+            <p>Pork drumstick turkey fugiat. Tri-tip elit turducken pork chop in. Swine short ribs meatball irure bacon nulla pork belly cupidatat meatloaf cow.</p>
+            <a href="#">Read More →</a>
+        </div>
+
+    </aside>
 
 
 </div>
 
-
 <footer class="row">
-  <div class="large-12 columns">
-    <hr/>
-    <div class="row">
-      <div class="large-6 columns">
-        <p>© Copyright JAQ.</p>
-      </div>
-      <div class="large-6 columns">
-        <ul class="inline-list right">
-          <li><a href="#">Link 1</a></li>
-          <li><a href="#">Link 2</a></li>
-          <li><a href="#">Link 3</a></li>
-          <li><a href="#">Link 4</a></li>
-        </ul>
-      </div>
+    <div class="large-12 columns">
+        <hr/>
+        <div class="row">
+            <div class="large-6 columns">
+                <p>© Copyright JAQ.</p>
+            </div>
+            <div class="large-6 columns">
+                <ul class="inline-list right">
+                    <li><a href="#">Link 1</a>
+                    </li>
+                    <li><a href="#">Link 2</a>
+                    </li>
+                    <li><a href="#">Link 3</a>
+                    </li>
+                    <li><a href="#">Link 4</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
-  </div>
 </footer>
 
 <script>
-  $(document).ready(function() {
-    // Configure/customize these variables.
-    var showChar = 751; 
-    var ellipsestext = "...";
-    var moretext = "Show more →";
-    var lesstext = "Show less";
-    
-    
-    $('.more').each(function() {
-      var content = $(this).html();
-      
-      if(content.length > showChar) {
-        
-        var c = content.substr(0, showChar);
-        var h = content.substr(showChar, content.length - showChar);
-        
-        var html = c + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
-        
-        $(this).html(html);
-      }
-      
-    });
-    
-    $(".morelink").click(function(){
-      if($(this).hasClass("less")) {
-        $(this).removeClass("less");
-        $(this).html(moretext);
-      } else {
-        $(this).addClass("less");
-        $(this).html(lesstext);
-      }
-      $(this).parent().prev().toggle();
-      $(this).prev().toggle();
-      return false;
-    });
-  });
+    //  $(document).ready(function() {
+    //
+    //    // Configure/customize these variables.
+    //    var showChar = 751; 
+    //    var ellipsestext = "...";
+    //    var moretext = "Show more →";
+    //    var lesstext = "Show less";
+    //    
+    //    
+    //    $('.more').each(function() {
+    //      var content = $(this).html();
+    //      
+    //      if(content.length > showChar) {
+    //        
+    //        var c = content.substr(0, showChar);
+    //        var h = content.substr(showChar, content.length - showChar);
+    //        
+    //        var html = c + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
+    //        
+    //        $(this).html(html);
+    //      }
+    //      
+    //    });
+    //    
+    //    $(".morelink").click(function(){
+    //      if($(this).hasClass("less")) {
+    //        $(this).removeClass("less");
+    //        $(this).html(moretext);
+    //      } else {
+    //        $(this).addClass("less");
+    //        $(this).html(lesstext);
+    //      }
+    //      $(this).parent().prev().toggle();
+    //      $(this).prev().toggle();
+    //      return false;
+    //    });
+    //  });
 </script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>

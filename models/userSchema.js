@@ -16,10 +16,6 @@ var user = new mongoose.Schema({
   }
 });
 
-
-
-
-
 user.methods.generateHash = function(password) {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };

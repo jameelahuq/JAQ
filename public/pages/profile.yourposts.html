@@ -1,19 +1,20 @@
 <h1>Your posts</h1>
 
 
- <article class="more" ng-repeat="post in posts track by $index">
+<article class="more" ng-repeat="post in posts track by $index">
 
-      <h3>{{post.title}}</h3>
-      <h6>Written by you on {{post.date}}</h6>
+    <h3>{{post.title}}</h3>
+    <h6>Written by you on {{post.date}}</h6>
 
-      <div class="row">
+    <div class="row">
         <div class="large-12 columns">
-         {{post.thePost}}
-         <p ng-repeat="tag in post.tags">Tags: {{tag}}</p>
-          <hr/>
+            {{post.thePost}}
+            <p ng-repeat="tag in post.tags">Tags: {{tag}}</p>
+            <a class="button radius tiny" ng-click="delete(post._id)">Delete</a>&nbsp; &nbsp; <a class="button radius tiny" ng-click="edit(post._id)">Edit</a>
+            <hr/>
         </div>
         <div class="large-12 columns">
-          <img src="http://placehold.it/400x240&text=[img]" />
+            <img src="http://placehold.it/400x240&text=[img]" />
         </div>
-      </div>
-    </article>
+    </div>
+</article>

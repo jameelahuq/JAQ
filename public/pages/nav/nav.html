@@ -1,5 +1,5 @@
 <div ng-controller="navCtrl">
-<nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+  <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
     <ul class="title-area">
       <li class="name">
         <h1><a href="#/home">JAQ'd</a></h1>
@@ -24,47 +24,39 @@
         </li>
       </ul>
       <ul class="right">
-       <li><a href="#home">Feed  <i class="fa fa-home fa-lg"></i></a></li>
+        <li><a href="#home">Feed  <i class="fa fa-home fa-lg"></i></a></li>
         <li><a href="#profile">Profile  <i class="fa fa-user fa-lg"></i></a></li>
         <li><a class="js-mo">Post  <i class="fa fa-plus-square-o fa-lg"></i></a></li>
         <li><a class="btn btn-danger" href="/auth/google"><span class="fa fa-google-plus"></span>Sign In</a></li>
       </ul>
-      <ul>
-
-        <ul class="left">
-
-        </ul>
     </section>
-
   </nav>
 
   <div id="main">
     <div class="hidden js-checkbox-container hidden checkbox-container">
-     <form action="">
-      <input type="text" placeholder="Blog Title" ng-model="post.title">
-      <textarea class="postBody" placeholder={{message}} ng-model="post.thePost"></textarea>
-      <div class="row">
-        <div class="medium-8 columns">
-          <input type="text" placeholder="Tags" ng-model="post.tags">
+      <form action="">
+        <input type="text" placeholder="Blog Title" ng-model="post.title">
+        <textarea class="postBody" placeholder={{message}} ng-model="post.thePost"></textarea>
+        <div class="row">
+          <div class="medium-8 columns">
+            <input type="text" placeholder="Tags" ng-model="post.tags">
+          </div>
+          <div class="medium-4 columns"><a class="button radius tiny js-mo" ng-click="addPost(post)"><i class="fa fa-paper-plane-o fa-lg"></i></a></div>
         </div>
-        <div class="medium-4 columns"><a class="button radius tiny" ng-click="addPost(post)"><i class="fa fa-paper-plane-o fa-lg"></i></a></div>
-      </div>
       </form>
     </div>
-  
-</div>
-    
-      <script>
-    $(function () { 
+
+  </div>
+
+  <script>
+    $(function () {
       $('.js-mo').on('click', function (e) {
         $('.js-checkbox-container').slideToggle(400);
       });
     });
-    
   </script>
-    
-    
-    
-  
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-    
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>

@@ -1,14 +1,32 @@
-jaqApp.controller('yourpostsCtrl', function($scope, $http) {
-$http({
-  method: 'GET',
-  url: 'http://localhost:8080/users/posts'
-    //change the userID depending on signed in user
+jaqApp.controller('yourpostsCtrl', function ($scope, $http) {
+  var get = function () {
+    $http({
+      method: 'GET',
+      url: 'http://localhost:8080/users/posts'
+        //change the userID depending on signed in user
     }).then(function successCallback(response) {
-    
-    console.log("yourpostctrl", response)
-    $scope.posts = response.data
-  }, function errorCallback(response) {
-  });
-  
 
+      console.log("yourpostctrl", response)
+      $scope.posts = response.data
+    }, function errorCallback(response) {});
+  }
+  get();
+
+
+  $scope.delete = function (id) {
+    var id = id;
+    $http({
+      method: 'DELETE',
+      url: 'http://localhost:8080/removePost/' + id
+        //change the userID depending on signed in user
+    }).then(function successCallback(response) {
+      get();
+
+    }, function errorCallback(response) {});
+
+  }
+  $scope.edit = function (id) {
+    console.log(id);
+
+  }
 });
