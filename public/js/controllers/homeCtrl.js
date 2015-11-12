@@ -1,14 +1,42 @@
 'use strict';
 jaqApp.controller('homeCtrl', function ($scope, $http, constants) {
-   
+  
+      var executed = false;
+      $(window).scroll(function() {   
+        if($(window).scrollTop() + $(window).height() > $(document).height() / 2 && executed === false && $scope.signedIn !== true) {
+          executed = true;
+          swal({   title: "Sign in or Continue Reading?",   text: "Sign in to share your opinion!",   showCancelButton: true, cancelButtonText:"Keep Reading",  imageUrl: "http://image1.spreadshirtmedia.net/image-server/v1/compositions/22970831/views/1,width=235,height=235,appearanceId=1,backgroundColor=f9f9f9,version=1440399755/smiley-T-shirts.jpg", confirmButtonColor: "#00bb66",   confirmButtonText: "Yes, sign in!",   closeOnConfirm: false }, function(){
+            
+            swal("Awesome!", "You're signed in!", "success"); 
+            window.location="/auth/google"
+          });
+        }
+      });
+      
+      var something = (function() {
+        var executed = false;
+        return function () {
+          if (!executed) {
+            executed = true;
+            // do something
+          }
+        };
+      })();
+  
    let api = constants.siteUrl;
-   //   $http({
-   //       method: 'POST',
-   //         url: 'http://localhost:8080/id'
-   //       }).then(function successCallback(response) {
-   //         console.log("id", response)
-   //       }, function errorCallback(response) {});
 
+  var get = function () {
+    $http({
+      method: 'GET',
+      url: api + '/users/posts'
+        //change the userID depending on signed in user
+    }).then(function successCallback(response) {
+      $scope.signedIn = true;
+      console.log("you good")
+    }, function errorCallback(response) {});
+  }
+  get();
+  
    $scope.clearField = function () {
      $scope.comment = "";
    }
@@ -19,19 +47,14 @@ jaqApp.controller('homeCtrl', function ($scope, $http, constants) {
        url: api+'/everything'
          //change the userID depending on signed in user
      }).then(function successCallback(response) {
-       //       console.log("woo[", response.data[0])
-       //      $scope.posts = []
-       //       for(var i=0; i<response.data.length; i++){
-       //         for(var j=0; j<response.data[i].posts.length; j++){
-       //           $scope.posts.push(response.data[i].posts[j].thePost);
-       //         }
-       //       }
+
        $scope.data = response.data;
      }, function errorCallback(response) {});
    }
    get();
 
    $scope.like = function (id) {
+     
      if ($scope.liked === "Dislike") {
        $http({
          method: 'POST',
