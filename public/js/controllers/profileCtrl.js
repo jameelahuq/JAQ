@@ -1,8 +1,6 @@
 'use strict';
 
-jaqApp.controller('profileCtrl', function ($scope, $http, $window, md5, constants) {
-  
-  let api = constants.siteUrl;
+jaqApp.controller('profileCtrl', function ($scope, $http, $window, md5) {
 
   $http({
     method: 'GET',

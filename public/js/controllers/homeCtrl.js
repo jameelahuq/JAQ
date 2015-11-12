@@ -1,10 +1,10 @@
 'use strict';
-jaqApp.controller('homeCtrl', function ($scope, $http, constants) {
-   
-   let api = constants.siteUrl;
+
+jaqApp.controller('homeCtrl', function ($scope, $http) {
+
    //   $http({
    //       method: 'POST',
-   //         url: api + '/id'
+   //         url: '/id'
    //       }).then(function successCallback(response) {
    //         console.log("id", response)
    //       }, function errorCallback(response) {});
@@ -12,7 +12,7 @@ jaqApp.controller('homeCtrl', function ($scope, $http, constants) {
    $scope.clearField = function () {
      $scope.comment = "";
    }
-   $scope.liked = "Like"
+   $scope.liked = "Like";
    var get = function () {
      $http({
        method: 'GET',
@@ -46,7 +46,7 @@ jaqApp.controller('homeCtrl', function ($scope, $http, constants) {
          method: 'POST',
          url: '/likedPost/' + id
        }).then(function successCallback(response) {
-         $scope.liked = "Dislike"
+         $scope.liked = "Dislike";
          get();
        }, function errorCallback(response) {});
      }
