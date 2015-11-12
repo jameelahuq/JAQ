@@ -8,10 +8,10 @@ let api = constants.siteUrl;
     url: api + '/users/id'
       //change the userID depending on signed in user
   }).then(function successCallback(response) {
-    $scope.author = response.data.google.name
+    $scope.author = response.data.google.name;
     console.log("youtrl", response)
   }, function errorCallback(response) {
-    swal("Oops...", "Please Sign in to view your profile", "error")
+    swal("Oops...", "Please Sign in to view your profile", "error");
     $window.location.href = "#/home";
 
   });
