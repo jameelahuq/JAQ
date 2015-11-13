@@ -26,7 +26,7 @@ jaqApp.config(function ($stateProvider, $urlRouterProvider) {
   })
    .state('viewProfile.follow', {
     templateUrl: 'pages/viewProfile.follow.html',
-    controller: 'viewProfileCtrl'
+    controller: 'viewFollowCtrl'
   })
      .state('viewProfile.followers', {
     templateUrl: 'pages/viewProfile.followers.html',

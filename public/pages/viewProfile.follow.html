@@ -1,0 +1,13 @@
+<div class="row" ng-controller="viewFollowCtrl">
+    <h1>People that {{author}} follows</h1>
+    <h4 ng-repeat="follows in peopleThatFollow track by $index"></h4>
+    <ul ng-repeat="(index, hash) in hashEmailed track by $index">
+        <li>
+            <b><a href="#/profile/{{peopleThatFollow[index]._id}}">
+                <img  height="42" width="42" src= "http://www.gravatar.com/avatar/{{hash}}" alt="face"></img>
+                {{peopleThatFollow[index].google.name}}
+            </a></b>
+        </li>
+        <hr/>
+    </ul>
+</div>
