@@ -1,7 +1,7 @@
 module.exports = {
   DEPLOY_URL: process.env.DEPLOY_URL,
   MONGO_URL:  process.env.MONGOLAB_URI || 'mongodb://localhost/JAQblogger',
-  SECRET: 'ANYFUCKINGTHINGIWANT',
+  SECRET: 'GITHUBHASTHECUTESTANIMALS!!!',
   MAILGUN_KEY: process.env.MAILGUN_KEY,
   MAILGUN_DOMAIN: process.env.MAILGUN_DOMAIN,
 
