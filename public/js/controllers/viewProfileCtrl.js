@@ -32,9 +32,8 @@ jaqApp.controller('viewProfileCtrl', function ($scope, $http, $window, md5, $loc
 //    $scope.posts = response.data.posts;
     console.log("follow", response)
   }, function errorCallback(response) {
-      console.log("error", response)
-//    swal("Oops...", "Please Sign in to view your profile", "error");
-//    $window.location.href = "#/home";
+
+    swal("Oops...", "Please Sign in to follow a user", "error");
 
   });
   }  

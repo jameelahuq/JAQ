@@ -38,7 +38,7 @@ router.get('/:field/profile/:userId',function(req,res){
   User.findById(req.params.userId)
       .populate(req.params.field)
       .exec(function (err, data){
-        err ? res.status(401).send(err) : res.send(data[req.params.field])
+        err ? res.status(401).send(err) : res.send(data)
       })
 });
 
@@ -52,7 +52,7 @@ router.post('/follow/profile/:toFollowId', function (req, res) {
   }, function (err, data) {
     User.findByIdAndUpdate(req.params.toFollowId, {
       $push: {
-        'followers': data._id
+        'followers': req.user._id
       }
     }, function (err, result) {
       if (err) res.send(err);
