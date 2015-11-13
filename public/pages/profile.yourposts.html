@@ -1,23 +1,23 @@
 <h1>Your posts</h1>
 <div ng-hide="editText">
- <textarea name="" id="" ng-model="editPost" cols="30" rows="10">
-  
-</textarea>
-<a class="button radius tiny alert" ng-click="editText=true">Cancel</a>&nbsp; &nbsp; <a class="button radius tiny" ng-click="pushEdit(editPost); edit(); editText=true">Save</a>
+    <textarea name="" id="" ng-model="editPost" cols="30" rows="10">
+
+    </textarea>
+    <a class="button radius tiny alert" ng-click="editText=true">Cancel</a>&nbsp; &nbsp; <a class="button radius tiny" ng-click="pushEdit(editPost); edit(); editText=true">Save</a>
 </div>
 <article class="more" ng-repeat="post in posts track by $index">
 
     <h3>{{post.title}}</h3>
-    <h6>Written by you on {{post.date}}</h6>
+    <h6>Written by you on {{post.date | date: "MMMM d, y"}}</h6>
 
     <div class="row">
         <div class="large-12 columns" ng-show="read">
-      
+
             {{post.thePost}}
             <p ng-repeat="tag in post.tags">Tags: {{tag}}</p>
             <a class="button radius tiny alert" ng-click="delete(post._id)">Delete</a>&nbsp; &nbsp; <a class="button radius tiny" ng-click="edit(post)">Edit</a>
             <hr/>
         </div>
-        
+
     </div>
 </article>
