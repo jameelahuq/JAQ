@@ -1,9 +1,10 @@
 <h1>Your posts</h1>
-
- <textarea ng-hide="edit" name="" id="" ng-model="editPost" cols="30" rows="10">
+<div ng-hide="editText">
+ <textarea name="" id="" ng-model="editPost" cols="30" rows="10">
   
 </textarea>
-
+<a class="button radius tiny alert" ng-click="editText=true">Cancel</a>&nbsp; &nbsp; <a class="button radius tiny" ng-click="pushEdit(editPost); edit(); editText=true">Save</a>
+</div>
 <article class="more" ng-repeat="post in posts track by $index">
 
     <h3>{{post.title}}</h3>

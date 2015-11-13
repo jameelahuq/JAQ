@@ -16,16 +16,13 @@
             </a>
             <div class="section-container vertical-nav" data-section data-options="deep_linking: false; one_up: true">
                 <section class="section">
-                    <h5 class="title"><a ui-sref=".follow">People {{firstName}} follows</a></h5>
+                    <h5 class="title"><a ui-sref="viewProfile.follow">People {{firstName}} follows</a></h5>
                 </section>
                 <section class="section">
-                    <h5 class="title"><a ui-sref=".tags">{{firstName}}'s Tags</a></h5>
+                    <h5 class="title"><a ui-sref="viewProfile.posts">{{firstName}}'s Posts</a></h5>
                 </section>
                 <section class="section">
-                    <h5 class="title"><a ui-sref="profile.yourposts">{{firstName}}'s Posts</a></h5>
-                </section>
-                <section class="section">
-                    <h5 class="title"><a ui-sref="profile.followers">{{firstName}}'s Followers</a></h5>
+                    <h5 class="title"><a ui-sref="viewProfile.followers">{{firstName}}'s Followers</a></h5>
                 </section>
             </div>
         </div>

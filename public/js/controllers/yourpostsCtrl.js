@@ -32,7 +32,7 @@ jaqApp.controller('yourpostsCtrl', function ($scope, $http) {
             swal("Deleted!", "Your imaginary file has been deleted.", "success");
             $http({
               method: 'DELETE',
-              url: api + '/removePost/' + id
+              url: '/removePost/' + id
             }).then(function successCallback(response) {
               get();
             }, function errorCallback(response) {
@@ -52,12 +52,38 @@ jaqApp.controller('yourpostsCtrl', function ($scope, $http) {
     });
   };
   $scope.read = true;
+  $scope.editText = true;
+  var currentEdit = [];
   $scope.edit = function (post) {
-
-    $scope.edit = false
-    $scope.editPost = post.thePost;
-  
-
+    currentEdit.push(post);
+    if (post){
+       $scope.editPost = post.thePost;
+    }
+    $scope.editText === true ? $scope.editText = false : $scope.editText = false 
+    var number = currentEdit.length - 1
+    if (currentEdit[number] !== undefined){
+      var currentEditId = currentEdit[number]._id;
+    }
+    $scope.pushEdit = function(editPost){
+      var obj = {
+        thePost: editPost
+      }
+      console.log(obj)
+      $http({
+        method: 'POST',
+        url: 'posts/edit/' + currentEditId,
+        data: obj
+        //change the userID depending on signed in user
+      }).then(function successCallback(response) {
+        get();
+      });
+    }
   }
+  
+//  $scope.update = function (editPost) {
+//    
+//    console.log(editPost)
+//    
+//  }
 });
 

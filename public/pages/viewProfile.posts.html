@@ -1,0 +1,19 @@
+<h1>{{firstName}}'s posts</h1>
+
+
+<article class="more" ng-repeat="post in posts track by $index">
+
+    <h3>{{post.title}}</h3>
+    <h6>Written by {{firstName}} on {{post.date}}</h6>
+
+    <div class="row">
+        <div class="large-12 columns">
+      
+            {{post.thePost}}
+            <p ng-repeat="tag in post.tags">Tags: {{tag}}</p>
+      
+            <hr/>
+        </div>
+        
+    </div>
+</article>
