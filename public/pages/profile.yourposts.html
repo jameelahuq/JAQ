@@ -1,5 +1,8 @@
 <h1>Your posts</h1>
 
+ <textarea ng-hide="edit" name="" id="" ng-model="editPost" cols="30" rows="10">
+  
+</textarea>
 
 <article class="more" ng-repeat="post in posts track by $index">
 
@@ -7,14 +10,13 @@
     <h6>Written by you on {{post.date}}</h6>
 
     <div class="row">
-        <div class="large-12 columns">
+        <div class="large-12 columns" ng-show="read">
+      
             {{post.thePost}}
             <p ng-repeat="tag in post.tags">Tags: {{tag}}</p>
-            <a class="button radius tiny alert" ng-click="delete(post._id)">Delete</a>&nbsp; &nbsp; <a class="button radius tiny" ng-click="edit(post._id)">Edit</a>
+            <a class="button radius tiny alert" ng-click="delete(post._id)">Delete</a>&nbsp; &nbsp; <a class="button radius tiny" ng-click="edit(post)">Edit</a>
             <hr/>
         </div>
-        <div class="large-12 columns">
-            <img src="http://placehold.it/400x240&text=[img]" />
-        </div>
+        
     </div>
 </article>

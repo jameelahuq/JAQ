@@ -42,13 +42,13 @@
     <div id="main">
         <div class="hidden js-checkbox-container hidden checkbox-container">
             <form action="">
-                <input type="text" placeholder="Blog Title" ng-model="post.title">
-                <textarea class="postBody" placeholder={{message}} ng-model="post.thePost"></textarea>
+                <input type="text" placeholder="Blog Title" ng-model="postData.title">
+                <textarea class="postBody" placeholder={{message}} ng-model="postData.thePost"></textarea>
                 <div class="row">
                     <div class="medium-8 columns">
-                        <input type="text" placeholder="Tags" ng-model="post.tags">
+                        <input type="text" placeholder="Tags" ng-model="postData.tags">
                     </div>
-                    <div class="medium-4 columns"><a class="button radius tiny js-mo" ng-click="addPost(post)"><i class="fa fa-paper-plane-o fa-lg"></i></a>
+                    <div class="medium-4 columns"><a class="button radius tiny js-mo" ng-click="addPost(postData)"><i class="fa fa-paper-plane-o fa-lg"></i></a>
                     </div>
                 </div>
             </form>

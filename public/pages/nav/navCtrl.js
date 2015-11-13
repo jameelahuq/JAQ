@@ -43,15 +43,16 @@ jaqApp.controller('navCtrl', function ($scope, $http) {
   get();
 
   console.log("inside navCtrl");
-  $scope.addPost = function (post) {
-
+  $scope.addPost = function (postData) {
+    var postData = postData
+    
     $http({
       method: 'POST',
-      data: post,
+      data: postData,
       url: '/posts/addPost'
-
     }).then(function successCallback(response) {
       console.log(response)
+       $('.js-checkbox-container').slideToggle(400);
     }, function errorCallback(response) {
       swal("Oops...", "Please Sign in to Post", "error")
     });

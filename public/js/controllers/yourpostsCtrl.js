@@ -51,9 +51,12 @@ jaqApp.controller('yourpostsCtrl', function ($scope, $http) {
       get();
     });
   };
+  $scope.read = true;
+  $scope.edit = function (post) {
 
-  $scope.edit = function (id) {
-    console.log(id);
+    $scope.edit = false
+    $scope.editPost = post.thePost;
+  
 
   }
 });
