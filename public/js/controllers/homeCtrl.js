@@ -1,6 +1,6 @@
 'use strict';
 
-jaqApp.controller('homeCtrl', function ($scope, $http) {
+jaqApp.controller('homeCtrl', function ($scope, $http, md5) {
 
   var executed = false;
   $(window).scroll(function () {
@@ -100,7 +100,15 @@ jaqApp.controller('homeCtrl', function ($scope, $http) {
       }).then(function successCallback(response) {
 
         console.log("comments", response);
+//         
         $scope.comments = response.data.comments
+        $scope.hashEmailed = []
+        if (response.data.comments.length>0 || response.data.comments !== undefined){
+           for (var i=0; i < response.data.comments.length; i++){
+            $scope.hashEmailed.push(md5.createHash(response.data.comments[i].author.google.email));
+           }
+          console.log($scope.hashEmailed)
+        }
 
       }, function errorCallback(response) {});
       $scope.addComment = function (comment) {
