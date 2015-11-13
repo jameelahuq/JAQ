@@ -10,40 +10,15 @@ module.exports = function (app, passport) {
     }); // load the index.ejs file
   });
 
-  //
-  //router.get('/', function(req, res){
-  //  Car.find(function(err, cars){
-  //    var data = {
-  //      allCars : cars,
-  //    };
-  //    if (req.user) {
-  //      data.currentUserName = req.user.displayName;
-  //    }
-  //    res.json(data);
-  //  });
-  //});
-
   app.get('/userdata', isLoggedIn, function (req, res) {
-    console.log("retrieving user credentials");
     var data = req.user;
     res.json(data);
-
-    //TODO: this page will be frontend
-    //res.render('profile.ejs', {
-    //  user : req.user // get the user out of session and pass to template
-    //});
   });
 
   // route for showing the profile page
   app.get('/profile', isLoggedIn, function (req, res) {
-    console.log("retrieving user credentials");
     var data = req.user;
     res.json(data);
-
-    //TODO: this page will be frontend
-    //res.render('profile.ejs', {
-    //  user : req.user // get the user out of session and pass to template
-    //});
   });
 
   // route for logging out

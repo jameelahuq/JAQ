@@ -1,7 +1,7 @@
 'use strict';
 
-jaqApp.controller('profileCtrl', function ($scope, $http, $window, md5) {
-
+jaqApp.controller('profileCtrl', function ($scope, $http, $window, md5, $state) {
+$state.go('profile.yourposts')
   $http({
     method: 'GET',
     url: '/users/id'

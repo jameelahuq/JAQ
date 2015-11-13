@@ -6,7 +6,7 @@
 
         <article class="more" ng-repeat="datum in data track by $index">
             <div ng-repeat="post in datum.posts track by $index">
-                <h3><a href="#">{{post.title}}</a></h3>
+                <h3>{{post.title}}</h3>
                 <h6>Written by <a href="#/profile/{{datum._id}}">{{datum.google.name}}</a> on {{post.date | date: "MMMM d, y"}}</h6>
                 <p>{{post.thePost}}</p>
 
@@ -18,7 +18,8 @@
                         <p ng-repeat="comment in comments"><b><a href="#/profile/{{comment.author._id}}">{{comment.author.google.name}}</a></b>: {{comment.text}}</p>
                     </div>
                     <div class="medium-12 columns">
-                        <input id="commentText" type="text" placeholder="Respond Nicely" ng-model="comment.text"><a class="button radius tiny" ng-click="addComment(comment); clearField()">Send</a>
+                        <input id="commentText" type="text" placeholder="Respond Nicely" ng-model="comment.text">
+                        <a class="button radius tiny" ng-click="addComment(comment); clearField()">Send</a>
                     </div>
                 </div>
                 <div class="comment medium-12 columns"><a class="button radius tiny" value="Toggle First = {{box1}}" ng-click="box1=!box1; getComments(post._id);">{{post.comments.length}} Comments {{button}}</a>&nbsp; &nbsp; <a class="button radius tiny" ng-click="like(post._id)">{{liked}}</a>

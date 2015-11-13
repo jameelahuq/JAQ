@@ -14,7 +14,7 @@ jaqApp.controller('navCtrl', function ($scope, $http) {
         text: "You must be signed in to post!",
         showCancelButton: true,
         cancelButtonText: "Cancel",
-        imageUrl: "http://image1.spreadshirtmedia.net/image-server/v1/compositions/22970831/views/1,width=235,height=235,appearanceId=1,backgroundColor=f9f9f9,version=1440399755/smiley-T-shirts.jpg",
+        imageUrl: "../../../img/smiley.png",
         confirmButtonColor: "#00bb66",
         confirmButtonText: "Yes, sign in!",
         closeOnConfirm: false

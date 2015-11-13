@@ -3,7 +3,6 @@ var router = express.Router();
 var User = require('../models/userSchema');
 
 router.get('/everything', function (req, res) {
-  console.log(res)
   User.find({})
     .populate("posts")
     .exec(function (err, data) {
