@@ -6,9 +6,9 @@ jaqApp.controller('navCtrl', function ($scope, $http) {
     $http({
       method: 'GET',
       url: '/users/posts'
-    }).then(function successCallback(response) {
+    }).then(function successCallback(res) {
       $('.js-checkbox-container').slideToggle(400);
-    }, function errorCallback(response) {
+    }, function errorCallback(err) {
       swal({
         title: "Sign in?",
         text: "You must be signed in to post!",
@@ -24,37 +24,33 @@ jaqApp.controller('navCtrl', function ($scope, $http) {
         window.location = "/auth/google"
       });
     });
-  }
+  };
 
   var get = function () {
     $http({
       method: 'GET',
       url: '/users/posts'
-    }).then(function successCallback(response) {
-      $scope.inButton = false;
-      $scope.outButton = true;
-      console.log("you good")
-    }, function errorCallback(response) {
-      $scope.inButton = true;
-      $scope.outButton = false;
-      console.log("yooo");
+    }).then(function successCallback(res) {
+      $scope.loggedIn = true;
+      console.log(res);
+    }, function errorCallback(err) {
+      $scope.loggedIn = false;
+      console.log(err);
     });
   }
   get();
 
   console.log("inside navCtrl");
   $scope.addPost = function (postData) {
-    var postData = postData
     
     $http({
       method: 'POST',
       data: postData,
       url: '/posts/addPost'
     }).then(function successCallback(response) {
-      console.log(response)
        $('.js-checkbox-container').slideToggle(400);
-    }, function errorCallback(response) {
-      swal("Oops...", "Please Sign in to Post", "error")
+    }, function errorCallback(err) {
+      swal("Oops...", "Please Sign in to Post", err)
     });
 
   }
