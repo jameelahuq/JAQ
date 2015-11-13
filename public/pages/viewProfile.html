@@ -22,7 +22,10 @@
                     <h5 class="title"><a ui-sref="viewProfile.posts">{{firstName}}'s Posts</a></h5>
                 </section>
                 <section class="section">
-                    <h5 class="title"><a ui-sref="viewProfile.followers">{{firstName}}'s Followers</a></h5>
+                    <h5 class="title"><a ui-sref="viewProfile.followers" ng-click="followers()">{{firstName}}'s Followers</a></h5>
+                </section>
+                 <section class="section">
+                    <h5 class="title"><a ng-click= follow()>Follow {{firstName}}</a></h5>
                 </section>
             </div>
         </div>
