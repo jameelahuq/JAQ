@@ -2,9 +2,9 @@
 
 jaqApp.controller('viewProfileCtrl', function ($scope, $http, $window, md5, $location, $state) {
   console.log("hello");
+  $scope.follow = "Follow"
   var currentProfile = $location.path();
   $state.go('viewProfile.posts')
-  
   $http({
     method: 'GET',
     url: '/users/' + currentProfile,
@@ -20,6 +20,7 @@ jaqApp.controller('viewProfileCtrl', function ($scope, $http, $window, md5, $loc
 //    $window.location.href = "#/home";
 
   });
+  $scope.follow = "Follow"
   $scope.follow = function(viewProfile){
     $http({
     method: 'POST',
@@ -30,6 +31,8 @@ jaqApp.controller('viewProfileCtrl', function ($scope, $http, $window, md5, $loc
 //    $scope.mailHash = md5.createHash(response.data.google.email || "");
 //    $scope.firstName = response.data.google.name.substr(0,response.data.google.name.indexOf(' '))
 //    $scope.posts = response.data.posts;
+      swal("Woo!", "You are now following "+ response.data.google.name, "success");
+      $scope.follow = "Unfollow"
     console.log("follow", response)
   }, function errorCallback(response) {
 

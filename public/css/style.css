@@ -20,3 +20,6 @@
 li {
     list-style-type: none;
 }
+.sweet-alert fieldset {
+  display: none;
+}

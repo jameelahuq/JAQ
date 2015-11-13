@@ -46,12 +46,12 @@ router.get('/:field/profile/:userId',function(req,res){
 // the followed user to the "followed" array of the follower.
 router.post('/follow/profile/:toFollowId', function (req, res) {
   User.findByIdAndUpdate(req.user._id, {
-    $push: {
+    $addToSet: {
       'following': req.params.toFollowId
     }
   }, function (err, data) {
     User.findByIdAndUpdate(req.params.toFollowId, {
-      $push: {
+      $addToSet: {
         'followers': req.user._id
       }
     }, function (err, result) {
