@@ -19,6 +19,11 @@ jaqApp.config(function ($stateProvider, $urlRouterProvider) {
     templateUrl: 'pages/login.html',
     controller: 'loginCtrl'
   })
+  .state('viewProfile', {
+    url: '/profile/:id',
+    templateUrl: 'pages/viewProfile.html',
+    controller: 'viewProfileCtrl'
+  })
 
   .state('post', {
       url: '/post',

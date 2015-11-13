@@ -6,7 +6,7 @@ jaqApp.controller('homeCtrl', function ($scope, $http) {
       $(window).scroll(function() {   
         if($(window).scrollTop() + $(window).height() > $(document).height() / 2 && executed === false && $scope.signedIn !== true) {
           executed = true;
-          swal({   title: "Sign in or Continue Reading?",   text: "Sign in to share your opinion!",   showCancelButton: true, cancelButtonText:"Keep Reading",  imageUrl: "http://image1.spreadshirtmedia.net/image-server/v1/compositions/22970831/views/1,width=235,height=235,appearanceId=1,backgroundColor=f9f9f9,version=1440399755/smiley-T-shirts.jpg", confirmButtonColor: "#00bb66",   confirmButtonText: "Yes, sign in!",   closeOnConfirm: false }, function(){
+          swal({   title: "Sign in or Continue Reading?",   text: "Sign in to share your opinion!",   showCancelButton: true, cancelButtonText:"Keep Reading",  imageUrl: "../../img/smiley-T-shirts.jpg", confirmButtonColor: "#00bb66",   confirmButtonText: "Yes, sign in!",   closeOnConfirm: false }, function(){
             
             swal("Awesome!", "You're signed in!", "success"); 
             window.location="/auth/google"
