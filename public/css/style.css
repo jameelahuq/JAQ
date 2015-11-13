@@ -15,6 +15,12 @@
     padding:10px;
     margin-left:20px;
 }
-.postBody { width: 1300px; height: 500px 
 
- 
+.postBody {
+    width: 1300px;
+    height: 500px;
+}
+
+.sweet-alert fieldset {
+    display: none;
+}

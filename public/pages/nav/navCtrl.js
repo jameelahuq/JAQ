@@ -40,18 +40,26 @@ jaqApp.controller('navCtrl', function ($scope, $http) {
   }
   get();
 
-  console.log("inside navCtrl");
   $scope.addPost = function (postData) {
-    
-    $http({
-      method: 'POST',
-      data: postData,
-      url: '/posts/addPost'
-    }).then(function successCallback(response) {
-       $('.js-checkbox-container').slideToggle(400);
-    }, function errorCallback(err) {
-      swal("Oops...", "Please Sign in to Post", err)
-    });
+    if (!postData.title || !postData.thePost) {
+      swal({
+        title: "Oops...",
+        text: "Please have a title and body in your post.",
+        imageUrl: "../../../img/oopsface.png",
+        imageSize: '100x100'
+      });
+    }
 
+    else {
+      $http({
+        method: 'POST',
+        data: postData,
+        url: '/posts/addPost'
+      }).then(function successCallback(response) {
+        $('.js-checkbox-container').slideToggle(400);
+      }, function errorCallback(err) {
+        swal("Oops...", "Please Sign in to Post", "error");
+      });
+    }
   }
 });
