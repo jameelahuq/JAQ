@@ -37,14 +37,14 @@ jaqApp.controller('navCtrl', function ($scope, $http) {
       $scope.loggedIn = false;
       console.log(err);
     });
-  }
+  };
   get();
 
   $scope.addPost = function (postData) {
-    if (!postData.title || !postData.thePost) {
+    if (!postData || !postData.title || !postData.thePost || !postData.tags ) {
       swal({
         title: "Oops...",
-        text: "Please have a title and body in your post.",
+        text: "Please have a title, body, and tags in your post.",
         imageUrl: "../../../img/oopsface.png",
         imageSize: '100x100'
       });

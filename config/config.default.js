@@ -1,5 +1,5 @@
 module.exports = {
-  MONGO_URL: '',
+  MONGO_URL: 'mongodb://localhost/JAQblogger',
   SECRET: '',
   MAILGUN_KEY: '',
   MAILGUN_DOMAIN: '',
@@ -7,7 +7,7 @@ module.exports = {
   'googleAuth' : {
     'clientID'      : '', // your App ID
     'clientSecret'  : '', // your App Secret
-    'callbackURL'   : ''
+    'callbackURL'   : 'http://localhost:8080/auth/google/callback'
   }
 };
 
