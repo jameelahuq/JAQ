@@ -15,7 +15,7 @@ router.get('/id',function(req,res){
 
 // This will take the parameter variable "field" and return the populated
 // array of that field for that user.
-router.get('/:field',function(req,res){
+router.get('/:field', function(req,res){
   User.findById(req.user._id)
       .populate(req.params.field)
       .exec(function (err, data){

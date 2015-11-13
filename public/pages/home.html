@@ -6,7 +6,7 @@
 
         <article class="more" ng-repeat="datum in data track by $index">
             <div ng-repeat="post in datum.posts track by $index">
-                <h3><a href="#">{{post.title}}</a></h3>
+                <h3>{{post.title}}</h3>
                 <h6>Written by <a href="#/profile/{{datum._id}}">{{datum.google.name}}</a> on {{post.date | date: "MMMM d, y"}}</h6>
                 <p>{{post.thePost}}</p>
 
@@ -14,11 +14,15 @@
                     <p><b>Tags:</b> {{tag}}</p>
                 </div>
                 <div class="hidden div1" data-slide-toggle="box1" data-slide-toggle-duration="100">
-                    <div>
-                        <p ng-repeat="comment in comments"><b><a href="#/profile/{{comment.author._id}}">{{comment.author.google.name}}</a></b>: {{comment.text}}</p>
+                    <div ng-repeat="(index, hash) in hashEmailed track by $index">
+                        <b><a href="#/profile/{{comments[index].author._id}}">
+                        <img  height="42" width="42" src= "http://www.gravatar.com/avatar/{{hash}}" alt="face"></img></a>
+                        {{comments[index].author.google.name}}</a></b>: {{comments[index].text}}</p>
                     </div>
+
                     <div class="medium-12 columns">
-                        <input id="commentText" type="text" placeholder="Respond Nicely" ng-model="comment.text"><a class="button radius tiny" ng-click="addComment(comment); clearField()">Send</a>
+                        <input id="commentText" type="text" placeholder="Respond Nicely" ng-model="comment.text">
+                        <a class="button radius tiny" ng-click="addComment(comment); clearField()">Send</a>
                     </div>
                 </div>
                 <div class="comment medium-12 columns"><a class="button radius tiny" value="Toggle First = {{box1}}" ng-click="box1=!box1; getComments(post._id);">{{post.comments.length}} Comments {{button}}</a>&nbsp; &nbsp; <a class="button radius tiny" ng-click="like(post._id)">{{liked}}</a>
