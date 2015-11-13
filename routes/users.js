@@ -33,10 +33,19 @@ router.get('/profile/:userId',function(req,res){
       })
 });
 
+
+router.get('/:field/profile/:userId',function(req,res){
+  User.findById(req.params.userId)
+      .populate(req.params.field)
+      .exec(function (err, data){
+        err ? res.status(401).send(err) : res.send(data[req.params.field])
+      })
+});
+
 // This will add the user to the "follower" array of another user, and add
 // the followed user to the "followed" array of the follower.
-router.post('/follow/:followersId/:toFollowId', function (req, res) {
-  User.findByIdAndUpdate(req.params.followersId, {
+router.post('/follow/profile/:toFollowId', function (req, res) {
+  User.findByIdAndUpdate(req.user._id, {
     $push: {
       'following': req.params.toFollowId
     }
@@ -51,6 +60,8 @@ router.post('/follow/:followersId/:toFollowId', function (req, res) {
     })
   })
 })
+
+
 
 // This will return all the users with all of their posts
 

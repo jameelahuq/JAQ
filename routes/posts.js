@@ -32,7 +32,7 @@ router.get('/:postId', function(req,res){
 })
 
 // This will update just the fields of the specified post
-// that have changed
+// that has changed
 router.post('/edit/:postId', function(req,res){
   Post.findByIdAndUpdate(req.params.postId,{
     $set: req.body, function(err,data){
@@ -44,7 +44,7 @@ router.post('/edit/:postId', function(req,res){
   })
 })
 
-// Adds a post. Pushes the id of itself into the authors "posts" array.
+// Adds a post. Pushes the id of itself into the author's "posts" array.
 router.post('/addPost', function (req, res) {
   Post.create({
     author: req.user._id,
@@ -58,7 +58,7 @@ router.post('/addPost', function (req, res) {
       res.send(err)
     }
     User.findByIdAndUpdate(req.user._id, {
-      $push: {
+      $addToSet: {
         'posts': data._id
       }
     }, function (err, user) {
@@ -70,11 +70,22 @@ router.post('/addPost', function (req, res) {
 })
 
 // Increments the "liked" field of the post by 1
-router.post('/likedPost/:liked', function (req, res) {
+router.post('/likedPost/:liked/:userId', function (req, res) {
   Post.findById(req.params.liked, function (err, postLiked) {
-    postLiked.likeIt();
-    postLiked.save(function (err, savedTask) {
+    if(err){
+      res.send(err)
+    }
+    User.findByIdAndUpdate(req.params.userId, {
+      $addToSet: {
+        'likedPosts': postLiked._id
+      } 
+    }, function(err,user){
+      (err)? res.send(err):user.save(function(err,data){
+      postLiked.likeIt(postLiked._id);
+      postLiked.save(function (err, savedTask) {
       res.send(savedTask)
+      });
+    })
     })
   });
 })
@@ -99,7 +110,6 @@ router.delete('/removePost/:postId/:userId', function (req, res) {
     } else {
       res.send('The file was not found or you do not have permission to delete it')
     }
-
   })
 })
 
@@ -120,12 +130,28 @@ router.delete('/removePost/:postId/', function (req, res) {
 // Adds a tag to the post
 router.post('/addTag/:postId', function (req, res) {
   Post.findById(req.params.postId, function (err, thePost) {
-    console.log(req.body.tag)
     thePost.tags.push(req.body.tag)
     thePost.save();
     res.send(thePost)
   })
 })
+
+//experiment
+// Adds a tag to the post
+// router.post('/addTag/:postId', function (req, res) {
+//   if (req.body.tags)
+//   Post.findByIdAndUpdate(req.params.postId, {
+//     $addToSet: {
+//       'tags': { $each:
+//         [req.body.tags]
+//       }
+//     }
+//   }, function (err, post) {
+//     if (err) res.send(err);
+//     post.save();
+//   res.send(post);
+//   })
+// })
 
 // Will search for posts by tag
 router.post('/findByTag', function (req, res) {

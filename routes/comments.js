@@ -56,7 +56,7 @@ router.post('/addComment/:postId', function (req, res) {
       }
     }, function (err, user) {
       Post.findByIdAndUpdate(req.params.postId, {
-        $push: {
+        $addToSet: {
           'comments': comment._id
         }
       }, function (err, thePost) {
