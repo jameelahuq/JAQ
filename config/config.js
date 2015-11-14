@@ -2,8 +2,8 @@ module.exports = {
   DEPLOY_URL: process.env.DEPLOY_URL,
   MONGO_URL:  process.env.MONGOLAB_URI || 'mongodb://localhost/JAQblogger',
   SECRET: 'ANYFUCKINGTHINGIWANT',
-  MAILGUN_KEY: process.env.MAILGUN_KEY,
-  MAILGUN_DOMAIN: process.env.MAILGUN_DOMAIN,
+  MAILGUN_KEY: 'key-8f9b4ef34787644895e78ab359389d2b',
+  MAILGUN_DOMAIN: 'sandbox9408007ca16d4905af0d1602eed3ea60.mailgun.org',
   
   'googleAuth' : {
     'clientID'      : '825949035576-t22hs85kirk3emo4blk7rscr4onc73mr.apps.googleusercontent.com', // your App ID

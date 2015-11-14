@@ -15,6 +15,7 @@ var User = require('../models/userSchema');
 // Finds all posts
 router.get('/getPosts', function (req, res) {
   Post.find({}, function (err, data) {
+
     if (err) {
       res.send(err)
     }
@@ -27,7 +28,7 @@ router.get('/getPosts', function (req, res) {
 router.get('/:postId', function(req,res){
   Post.findById(req.params.postId,{
   }, function(err,result){
-      res.send(result);
+    res.send(result);
   })
 })
 
@@ -39,7 +40,7 @@ router.post('/edit/:postId', function(req,res){
       console.log(data)
     }
   }, function(err,result){
-      res.send(result);
+    res.send(result);
     
   })
 })
@@ -70,25 +71,49 @@ router.post('/addPost', function (req, res) {
 })
 
 // Increments the "liked" field of the post by 1
-router.post('/likedPost/:liked/:userId', function (req, res) {
+router.post('/likedPost/:liked', function (req, res) {
   Post.findById(req.params.liked, function (err, postLiked) {
     if(err){
       res.send(err)
     }
-    User.findByIdAndUpdate(req.params.userId, {
+    User.findByIdAndUpdate(req.user._id, {
       $addToSet: {
         'likedPosts': postLiked._id
       } 
     }, function(err,user){
       (err)? res.send(err):user.save(function(err,data){
-      postLiked.likeIt(postLiked._id);
-      postLiked.save(function (err, savedTask) {
-      res.send(savedTask)
-      });
-    })
+        postLiked.likeIt(postLiked._id);
+        postLiked.save(function (err, savedTask) {
+          res.send(savedTask)
+        });
+      })
     })
   });
 })
+
+// // EXPERIMEN
+// router.post('/likedPost/:liked', function (req, res) {
+//   Post.findById(req.params.liked, function (err, postLiked) {
+//     if(err){
+//       res.send(err)
+//     }
+//     // if(req.user){
+//     User.findByIdAndUpdate(req.params.userId, {
+//       $addToSet: {
+//         'likedPosts': postLiked._id
+//       } 
+//     }, function(err,user){
+//       (err)? res.send(err):user.save(function(err,data){
+//       postLiked.likeIt(postLiked._id);
+//       postLiked.save(function (err, savedTask) {
+//       res.send(savedTask)
+//       });
+//     })
+//     })
+//   });
+// })
+
+
 
 // Decrements the "liked" field of the post by 1
 router.post('/dislikedPost/:liked', function (req, res) {
@@ -128,35 +153,38 @@ router.delete('/removePost/:postId/', function (req, res) {
 })
 
 // Adds a tag to the post
-router.post('/addTag/:postId', function (req, res) {
-  Post.findById(req.params.postId, function (err, thePost) {
-    thePost.tags.push(req.body.tag)
-    thePost.save();
-    res.send(thePost)
-  })
-})
+// router.post('/addTag/:postId', function (req, res) {
+//   Post.findById(req.params.postId, function (err, thePost) {
+//     thePost.tags.push(req.body.tags)
+//     thePost.save();
+//     res.send(thePost)
+//   })
+// })
 
 //experiment
 // Adds a tag to the post
-// router.post('/addTag/:postId', function (req, res) {
-//   if (req.body.tags)
-//   Post.findByIdAndUpdate(req.params.postId, {
-//     $addToSet: {
-//       'tags': { $each:
-//         [req.body.tags]
-//       }
-//     }
-//   }, function (err, post) {
-//     if (err) res.send(err);
-//     post.save();
-//   res.send(post);
-//   })
-// })
+router.post('/addTag/:postId', function (req, res) {
+  if (req.body.tags){
+    Post.findByIdAndUpdate(req.params.postId, {
+      $addToSet: {
+        'tags': { $each:
+          [req.body.tags]
+        }
+      }
+    }, function (err, post) {
+      if (err) res.send(err);
+      post.save();
+      res.send(post.tags);
+    })
+  }else{
+    res.send('No tag was added')
+  }
+})
 
 // Will search for posts by tag
 router.post('/findByTag', function (req, res) {
   Post.find({
-    "tags": req.body.tag
+    "tags": req.body.tags
   }, function (err, result) {
     console.log(result)
     if (err) res.send(err);
@@ -172,19 +200,20 @@ router.post('/findByTag', function (req, res) {
 // and also populate the "author" field for each of those comments
 router.get('/comments/:postId', function (req, res) {
   Post.findById(req.params.postId)
-    .populate({
-      path: 'comments',
-      populate: {
-        path: 'author'
-      }
-    })
-    .exec(function (err, data) {
-      err ? res.status(401).send(err) : res.send(data)
-    })
+  .populate({
+    path: 'comments',
+    populate: {
+      path: 'author'
+    }
+  })
+  .exec(function (err, data) {
+    err ? res.status(401).send(err) : res.send(data)
+  })
 });
 
 
 router.get('/submit/:mail', function (req, res) {
+  console.log('hello')
   var mailgun = new Mailgun({
     apiKey: config.MAILGUN_KEY,
     domain: config.MAILGUN_DOMAIN
