@@ -1,5 +1,5 @@
 <div ng-include="'pages/nav/nav.html'"></div>
-<div class="row" ng-controller="profileCtrl">
+<div class="row" ng-controller="viewProfileCtrl">
     <div class="large-12 columns">
         <div class="panel">
             <h1>{{author}}'s Profile</h1>
@@ -12,21 +12,20 @@
     <div class="large-3 columns ">
         <div class="panel">
             <div class="profilePic">
-                <a href="#"><img src="{{picUrl}}" alt="face"/></a>
+                <a href="#"><img src="{{picUrl}}"alt="face"/></a>
             </div>
-            <h5>{{author}}</h5>
             <div class="section-container vertical-nav" data-section data-options="deep_linking: false; one_up: true">
                 <section class="section">
-                    <h5 class="title"><a ui-sref=".follow">People you follow</a></h5>
+                    <h5 class="title"><a ui-sref="viewProfile.follow">People {{firstName}} follows</a></h5>
                 </section>
                 <section class="section">
-                    <h5 class="title"><a ui-sref=".tags">Your Tags</a></h5>
+                    <h5 class="title"><a ui-sref="viewProfile.posts">{{firstName}}'s Posts</a></h5>
                 </section>
                 <section class="section">
-                    <h5 class="title"><a ui-sref="profile.yourposts">Your Posts</a></h5>
+                    <h5 class="title"><a ui-sref="viewProfile.followers" ng-click="followers()">{{firstName}}'s Followers</a></h5>
                 </section>
-                <section class="section">
-                    <h5 class="title"><a ui-sref="profile.followers">Your Followers</a></h5>
+                 <section class="section">
+                    <h5 class="title"><a ng-click= follow()>Follow {{firstName}}</a></h5>
                 </section>
             </div>
         </div>

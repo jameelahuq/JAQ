@@ -5,13 +5,14 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('backend:server');
+var debug = require('debug')('JAQ:server');
 var http = require('http');
 
 /**
  * Get port from environment and store in Express.
  */
 
+// process.env.PORT lets the port be set by Heroku
 var port = normalizePort(process.env.PORT || '8080');
 app.set('port', port);
 

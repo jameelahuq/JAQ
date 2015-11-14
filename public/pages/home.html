@@ -1,131 +1,95 @@
-
-<div class="row">
-  <div class="large-9 columns" role="content">
-
-    <article class="more">
-
-      <h3><a href="#">Blog Post Title</a></h3>
-      <h6>Written by <a href="#">John Smith</a> on August 12, 2012.</h6>
-
-      <div class="row">
-        <div class="large-6 columns">
-          <p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong. Eiusmod swine spare ribs reprehenderit culpa.</p>
-          <p>Boudin aliqua adipisicing rump corned beef. Nulla corned beef sunt ball tip, qui bresaola enim jowl. Capicola short ribs minim salami nulla nostrud pastrami.</p>
-        </div>
-        <div class="large-6 columns">
-          <img src="http://placehold.it/400x240&text=[img]" />
-        </div>
-      </div>
-
-
-      <p>Pork drumstick turkey fugiat. Tri-tip elit turducken pork chop in. Swine short ribs meatball irure bacon nulla pork belly cupidatat meatloaf cow. Nulla corned beef sunt ball tip, qui bresaola enim jowl. Capicola short ribs minim salami nulla nostrud pastrami.</p>
-
-    </article>
-
-    <hr/>
-
-    <article class="more">
-
-      <h3><a href="#">Blog Post Title</a></h3>
-      <h6>Written by <a href="#">John Smith</a> on August 12, 2012.</h6>
-
-      <div class="row">
-        <div class="large-6 columns">
-          <p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong. Eiusmod swine spare ribs reprehenderit culpa.</p>
-          <p>Boudin aliqua adipisicing rump corned beef. Nulla corned beef sunt ball tip, qui bresaola enim jowl. Capicola short ribs minim salami nulla nostrud pastrami.</p>
-        </div>
-        <div class="large-6 columns">
-          <img src="http://placehold.it/400x240&text=[img]" />
-        </div>
-      </div>
-
-      <p>Pork drumstick turkey fugiat. Tri-tip elit turducken pork chop in. Swine short ribs meatball irure bacon nulla pork belly cupidatat meatloaf cow. Nulla corned beef sunt ball tip, qui bresaola enim jowl. Capicola short ribs minim salami nulla nostrud pastrami. Nulla corned beef sunt ball tip, qui bresaola enim jowl. Capicola short ribs minim salami nulla nostrud pastrami.</p>
-
-      <p>Pork drumstick turkey fugiat. Tri-tip elit turducken pork chop in. Swine short ribs meatball irure bacon nulla pork belly cupidatat meatloaf cow. Nulla corned beef sunt ball tip, qui bresaola enim jowl. Capicola short ribs minim salami nulla nostrud pastrami.</p>
-
-    </article>
-
-  </div>
+<div ng-include="'pages/nav/nav.html'"></div>
+<div class="row" ng-controller="homeCtrl">
+    <div class="large-9 columns" role="content">
 
 
 
-  <aside class="large-3 columns">
+        <article class="more" ng-repeat="datum in data track by $index">
+            <div ng-repeat="post in datum.posts track by $index">
+                <h3>{{post.title}}</h3>
+                <h6>Written by <a href="#/profile/{{datum._id}}">{{datum.google.name}}</a> on {{post.date | date: "MMMM d, y"}}</h6>
+                <p>{{post.thePost}}</p>
 
-    <h5>Categories</h5>
-    <ul class="side-nav">
-      <li><a href="#">News</a></li>
-      <li><a href="#">Code</a></li>
-      <li><a href="#">Design</a></li>
-      <li><a href="#">Fun</a></li>
-      <li><a href="#">Weasels</a></li>
-    </ul>
+                <div ng-repeat="tag in post.tags track by $index">
+                    <p><b>Tags:</b> {{tag}}</p>
+                </div>
+                <div class="hidden div1" data-slide-toggle="box1" data-slide-toggle-duration="100">
+                    <div ng-repeat="comment in comments">
+                       <p>
+                           <b><a href="#/profile/{{comment.author._id}}">
+                            <img height="42" width="42" src= "{{comment.author.google.picUrl}}" alt="user"/>
+                            {{comment.author.google.name}}
+                           </a></b>: {{comment.text}}
+                       </p>
+                    </div>
 
-    <div class="panel">
-      <h5>Featured</h5>
-      <p>Pork drumstick turkey fugiat. Tri-tip elit turducken pork chop in. Swine short ribs meatball irure bacon nulla pork belly cupidatat meatloaf cow.</p>
-      <a href="#">Read More →</a>
+                    <div class="medium-12 columns">
+                        <input id="commentText" type="text" placeholder="Respond Nicely" ng-model="comment.text">
+                        <a class="button radius tiny" ng-click="addComment(comment); clearField()">Send</a>
+                    </div>
+                </div>
+                <div class="comment medium-12 columns"><a class="button radius tiny" value="Toggle First = {{box1}}" ng-click="box1=!box1; getComments(post._id);">{{post.comments.length}} Comments {{button}}</a>&nbsp; &nbsp; <a class="button radius tiny" ng-click="like(post._id)">{{liked}}</a>
+                    <p>Likes: {{post.likes}}</p>
+                </div>
+
+
+                <hr/>
+            </div>
+
+        </article>
+
     </div>
 
-  </aside>
+
+
+    <aside class="large-3 columns">
+
+        <h5>Categories</h5>
+        <ul class="side-nav">
+            <li><a href="#">News</a>
+            </li>
+            <li><a href="#">Code</a>
+            </li>
+            <li><a href="#">Design</a>
+            </li>
+            <li><a href="#">Fun</a>
+            </li>
+            <li><a href="#">Weasels</a>
+            </li>
+        </ul>
+
+        <div class="panel">
+            <h5>Featured</h5>
+            <p>Pork drumstick turkey fugiat. Tri-tip elit turducken pork chop in. Swine short ribs meatball irure bacon nulla pork belly cupidatat meatloaf cow.</p>
+            <a href="#">Read More →</a>
+        </div>
+
+    </aside>
 
 
 </div>
 
-
 <footer class="row">
-  <div class="large-12 columns">
-    <hr/>
-    <div class="row">
-      <div class="large-6 columns">
-        <p>© Copyright no one at all. Go to town.</p>
-      </div>
-      <div class="large-6 columns">
-        <ul class="inline-list right">
-          <li><a href="#">Link 1</a></li>
-          <li><a href="#">Link 2</a></li>
-          <li><a href="#">Link 3</a></li>
-          <li><a href="#">Link 4</a></li>
-        </ul>
-      </div>
+    <div class="large-12 columns">
+        <hr/>
+        <div class="row">
+            <div class="large-6 columns">
+                <p>Copyright ©  2015 JAQ.</p>
+            </div>
+            <!--<div class="large-6 columns">-->
+                <!--<ul class="inline-list right">-->
+                    <!--<li><a href="#">Link 1</a>-->
+                    <!--</li>-->
+                    <!--<li><a href="#">Link 2</a>-->
+                    <!--</li>-->
+                    <!--<li><a href="#">Link 3</a>-->
+                    <!--</li>-->
+                    <!--<li><a href="#">Link 4</a>-->
+                    <!--</li>-->
+                <!--</ul>-->
+            <!--</div>-->
+        </div>
     </div>
-  </div>
 </footer>
 
-<script>
-  $(document).ready(function() {
-    // Configure/customize these variables.
-    var showChar = 751; 
-    var ellipsestext = "...";
-    var moretext = "Show more →";
-    var lesstext = "Show less";
-    
-    
-    $('.more').each(function() {
-      var content = $(this).html();
-      
-      if(content.length > showChar) {
-        
-        var c = content.substr(0, showChar);
-        var h = content.substr(showChar, content.length - showChar);
-        
-        var html = c + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
-        
-        $(this).html(html);
-      }
-      
-    });
-    
-    $(".morelink").click(function(){
-      if($(this).hasClass("less")) {
-        $(this).removeClass("less");
-        $(this).html(moretext);
-      } else {
-        $(this).addClass("less");
-        $(this).html(lesstext);
-      }
-      $(this).parent().prev().toggle();
-      $(this).prev().toggle();
-      return false;
-    });
-  });
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>

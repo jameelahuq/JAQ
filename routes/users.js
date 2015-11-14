@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var User = require('../models/userSchema');
 
 /* GET users listing. */
 
@@ -60,6 +61,44 @@ router.post('/follow/profile/:toFollowId', function (req, res) {
   })
 });
 
+// This route will return a user with their "posts" field populated
+router.get('/profile/:userId',function(req,res){
+  User.findById(req.params.userId)
+  .populate('posts')
+  .exec(function (err, data){
+    err ? res.status(401).send(err) : res.send(data)
+  })
+});
+
+
+router.get('/:field/profile/:userId',function(req,res){
+  User.findById(req.params.userId)
+
+      .populate(req.params.field)
+      .exec(function (err, data){
+        err ? res.status(401).send(err) : res.send(data)
+      })
+});
+
+// This will add the user to the "follower" array of another user, and add
+// the followed user to the "followed" array of the follower.
+router.post('/follow/profile/:toFollowId', function (req, res) {
+  User.findByIdAndUpdate(req.user._id, {
+    $addToSet: {
+      'following': req.params.toFollowId
+    }
+  }, function (err, data) {
+    User.findByIdAndUpdate(req.params.toFollowId, {
+      $addToSet: {
+        'followers': req.user._id
+      }
+    }, function (err, result) {
+      if (err) res.send(err);
+      res.send(result);
+    })
+  })
+});
+
 // This will remove the relevant "followed" and "following" ids from the relevant places
 router.post('/unfollow/profile/:userId', function(req,res){
   User.find(req.user._id, function(err,followerData){
@@ -84,9 +123,6 @@ router.post('/unfollow/profile/:userId', function(req,res){
   })
 });
 
-
-
-
 // This will return all the users with all of their posts
-
 module.exports = router;
+

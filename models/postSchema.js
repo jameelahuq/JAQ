@@ -9,9 +9,11 @@ var posts = new mongoose.Schema({
   title: {type: String, required:true},
   tags:[String]
 })
-
-posts.methods.likeIt = function(){
+posts.methods.likeIt = function(id){
   this.likes ++
+}
+posts.methods.dislikeIt = function(){
+  this.likes --
 }
 
 module.exports = mongoose.model('Posts',posts);

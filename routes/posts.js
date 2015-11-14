@@ -125,6 +125,7 @@ router.post('/dislikedPost/:liked', function (req, res) {
   });
 });
 
+
 // Removes the post, needs the author's id to complete
 router.delete('/removePost/:postId/:userId', function (req, res) {
   Post.findById(req.params.postId, function (err, data) {
@@ -212,7 +213,6 @@ router.get('/comments/:postId', function (req, res) {
 
 
 router.get('/submit/:mail', function (req, res) {
-
   var mailgun = new Mailgun({
     apiKey: config.MAILGUN_KEY,
     domain: config.MAILGUN_DOMAIN
@@ -223,6 +223,7 @@ router.get('/submit/:mail', function (req, res) {
     subject: "Hello from JAQ'd",
     html: 'Somebody has commented on your post.'
   };
+
   mailgun.messages().send(data, function (err, body) {
     if (err) {
       res.send(err)
