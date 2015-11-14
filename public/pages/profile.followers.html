@@ -1,3 +1,13 @@
-<!--
-<h1>People that follow you</h1>
-<h4 ng-repeat="post in posts track by $index">{{post.followers}}</h4>-->
+<div class="row" ng-controller="followersCtrl">
+  <h1>People that follow you</h1>
+
+  <ul ng-repeat="following in peopleYouFollow track by $index">
+    <li>
+      <b><a href="#/profile/{{following._id}}">
+      <img height="42" width="42" src= "{{following.google.picUrl}}" alt="face"/>
+      {{following.google.name}}</a></b>
+    </li>
+    <hr/>
+  </ul>
+
+</div>

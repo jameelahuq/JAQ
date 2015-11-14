@@ -1,5 +1,5 @@
 'use strict';
-jaqApp.controller('yourpostsCtrl', function ($scope, $http) {
+jaqApp.controller('yourPostsCtrl', function ($scope, $http) {
 
   var get = function () {
     $http({
@@ -58,7 +58,7 @@ jaqApp.controller('yourpostsCtrl', function ($scope, $http) {
       $scope.editPost = post.thePost;
     }
     $scope.editText === true ? $scope.editText = false : $scope.editText = false
-    var number = currentEdit.length - 1
+    var number = currentEdit.length - 1;
     if (currentEdit[number] !== undefined) {
       var currentEditId = currentEdit[number]._id;
     }
