@@ -36,17 +36,17 @@ router.get('/profile/:userId',function(req,res){
 
 router.get('/:field/profile/:userId',function(req,res){
   User.findById(req.params.userId)
-<<<<<<< HEAD
-  .populate(req.params.field)
-  .exec(function (err, data){
-    err ? res.status(401).send(err) : res.send(data[req.params.field])
-  })
-=======
+// <<<<<<< HEAD
+//   .populate(req.params.field)
+//   .exec(function (err, data){
+//     err ? res.status(401).send(err) : res.send(data[req.params.field])
+//   })
+// =======
       .populate(req.params.field)
       .exec(function (err, data){
         err ? res.status(401).send(err) : res.send(data)
       })
->>>>>>> d79aa7fe1e72a4eececf8340906a4b652f605f44
+// >>>>>>> d79aa7fe1e72a4eececf8340906a4b652f605f44
 });
 
 // This will add the user to the "follower" array of another user, and add
@@ -59,11 +59,7 @@ router.post('/follow/profile/:toFollowId', function (req, res) {
   }, function (err, data) {
     User.findByIdAndUpdate(req.params.toFollowId, {
       $addToSet: {
-<<<<<<< HEAD
-        'followers': data._id
-=======
         'followers': req.user._id
->>>>>>> d79aa7fe1e72a4eececf8340906a4b652f605f44
       }
     }, function (err, result) {
       if (err) res.send(err);
