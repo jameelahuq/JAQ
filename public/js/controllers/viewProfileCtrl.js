@@ -10,7 +10,7 @@ jaqApp.controller('viewProfileCtrl', function ($scope, $http, $window, md5, $loc
 
   }).then(function successCallback(response) {
     $scope.author = response.data.google.name || "Guest" ;
-    $scope.mailHash = md5.createHash(response.data.google.email || "");
+    $scope.picUrl = response.data.google.picUrl;
     $scope.firstName = response.data.google.name.substr(0,response.data.google.name.indexOf(' '))
     $scope.posts = response.data.posts;
   }, function errorCallback(err) {

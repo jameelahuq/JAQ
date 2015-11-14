@@ -23,18 +23,6 @@ jaqApp.controller('homeCtrl', function ($scope, $http, md5) {
     }
   });
 
-  var something = (function () {
-    var executed = false;
-    return function () {
-      if (!executed) {
-        executed = true;
-        // do something
-      }
-    };
-  })();
-
-
-
   var get = function () {
     $http({
       method: 'GET',
@@ -44,7 +32,7 @@ jaqApp.controller('homeCtrl', function ($scope, $http, md5) {
       $scope.signedIn = true;
       console.log("you good")
     }, function errorCallback(response) {});
-  }
+  };
   get();
 
 
@@ -63,7 +51,7 @@ jaqApp.controller('homeCtrl', function ($scope, $http, md5) {
     }, function errorCallback(response) {
       console.log(response)
     });
-  }
+  };
   get();
 
   $scope.like = function (id) {
@@ -88,7 +76,7 @@ jaqApp.controller('homeCtrl', function ($scope, $http, md5) {
         get();
       }, function errorCallback(response) {});
     }
-  }
+  };
 
   var getComments = function () {
     $scope.getComments = function (id) {
@@ -101,8 +89,8 @@ jaqApp.controller('homeCtrl', function ($scope, $http, md5) {
 
         console.log("comments", response);
 //         
-        $scope.comments = response.data.comments
-        $scope.hashEmailed = []
+        $scope.comments = response.data.comments;
+        $scope.hashEmailed = [];
         if (response.data.comments.length>0 || response.data.comments !== undefined){
            for (var i=0; i < response.data.comments.length; i++){
             $scope.hashEmailed.push(md5.createHash(response.data.comments[i].author.google.email));
@@ -126,7 +114,7 @@ jaqApp.controller('homeCtrl', function ($scope, $http, md5) {
       }
     }
 
-  }
+  };
   getComments();
 
   $scope.box1 = true;
