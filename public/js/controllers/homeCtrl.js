@@ -45,9 +45,32 @@ jaqApp.controller('homeCtrl', function ($scope, $http, md5) {
         //change the userID depending on signed in user
     }).then(function successCallback(response) {
 
-      console.log(response);
-
+      console.log("home", response);  
       $scope.data = response.data;
+      var obj = {
+        post: null,
+        likes: 0
+      }
+      for (var i = 0; i<response.data.length; i++) {
+        for(var j=0; j<response.data[i].posts.length; j++){
+          if (response.data[i].posts[j].likes > obj.likes){
+            obj.post = response.data[i].posts[j];
+            obj.likes = response.data[i].posts[j].likes;
+          }
+        }
+      }
+      console.log(obj.post)
+      $scope.featuredPostTitle = obj.post.title;
+      function getWords(post) {
+          return post.split(/\s+/).slice(1,22).join(" ");
+        }
+      $scope.featuredPostBody = getWords(obj.post.thePost);
+      $scope.featuredAuthor = obj.post.author;
+      
+      //find the largest response.data.posts[i].likes
+//      postWithMostLikes = response.data.posts[i].slice(0).sort(
+//        function(x, y) {return y.likes - x.likes})[0]
+//      )
     }, function errorCallback(response) {
       console.log(response)
     });
