@@ -8,7 +8,6 @@ module.exports = {
   'googleAuth' : {
     'clientID'      : process.env.GOOGLE_CLIENTID, // your App ID
     'clientSecret'  : process.env.GOOGLE_CLIENTSECRET, // your App Secret
-    //'callbackURL'   : 'https://jaqd.herokuapp.com/auth/google/callback'
     'callbackURL'   : process.env.GOOGLE_CALLBACKURL || 'http://localhost:8080/auth/google/callback'
 
   }

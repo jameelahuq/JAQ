@@ -35,8 +35,6 @@ jaqApp.controller('homeCtrl', function ($scope, $http, md5) {
   };
   get();
 
-
-
   $scope.liked = "Like";
   var get = function () {
     $http({
@@ -45,9 +43,35 @@ jaqApp.controller('homeCtrl', function ($scope, $http, md5) {
         //change the userID depending on signed in user
     }).then(function successCallback(response) {
 
-      console.log(response);
-
+      console.log("home", response);
       $scope.data = response.data;
+
+
+      var obj = {
+        post: null,
+        likes: 0
+      }
+      for (var i = 0; i < response.data.length; i++) {
+        for (var j = 0; j < response.data[i].posts.length; j++) {
+          if (response.data[i].posts[j].likes > obj.likes) {
+            obj.post = response.data[i].posts[j];
+            obj.likes = response.data[i].posts[j].likes;
+          }
+        }
+      }
+      console.log(obj.post)
+      $scope.featuredPostTitle = obj.post.title;
+
+      function getWords(post) {
+        return post.split(/\s+/).slice(1, 22).join(" ");
+      }
+      $scope.featuredPostBody = getWords(obj.post.thePost);
+      $scope.featuredAuthor = obj.post.author;
+
+      //find the largest response.data.posts[i].likes
+      //      postWithMostLikes = response.data.posts[i].slice(0).sort(
+      //        function(x, y) {return y.likes - x.likes})[0]
+      //      )
     }, function errorCallback(response) {
       console.log(response)
     });
@@ -55,6 +79,7 @@ jaqApp.controller('homeCtrl', function ($scope, $http, md5) {
   get();
 
   $scope.like = function (id) {
+    mixpanel.track("Liked Post", {"Page Name": "Liked post"})
 
     if ($scope.liked === "Dislike") {
       $http({
@@ -80,6 +105,7 @@ jaqApp.controller('homeCtrl', function ($scope, $http, md5) {
 
   var getComments = function () {
     $scope.getComments = function (id) {
+      mixpanel.track("Comments Viewed", {"Page Name": "Comments Viewed"})
       $http({
 
         method: 'GET',
@@ -88,26 +114,41 @@ jaqApp.controller('homeCtrl', function ($scope, $http, md5) {
       }).then(function successCallback(response) {
 
         console.log("comments", response);
-//         
+        var number = response.data.comments.length - 1
+        var commenter = response.data.comments[number].author.google.name;
+        $scope.emailAuthor = function () {
+            $http({
+              method: 'GET',
+              url: 'posts/submit/' + response.data.author.google.email + '/' + commenter
+            }).then(function successCallback(response) {
+              console.log("success", response)
+
+            }, function errorCallback(response) {
+              console.log(response)
+            });
+          }
+          //         
         $scope.comments = response.data.comments;
         $scope.hashEmailed = [];
-        if (response.data.comments.length>0 || response.data.comments !== undefined){
-           for (var i=0; i < response.data.comments.length; i++){
+        if (response.data.comments.length > 0 || response.data.comments !== undefined) {
+          for (var i = 0; i < response.data.comments.length; i++) {
             $scope.hashEmailed.push(md5.createHash(response.data.comments[i].author.google.email));
-           }
+          }
           console.log($scope.hashEmailed)
         }
 
       }, function errorCallback(response) {});
       $scope.addComment = function (comment) {
         var comment = comment;
+        mixpanel.track("Added Comment", {"Page Name": "Comment made"})
+        console.log(id)
         $http({
           method: 'POST',
           data: comment,
           url: 'comments/addComment/' + id
         }).then(function successCallback(response) {
           $scope.getComments(id)
-                    
+
         }, function errorCallback(response) {
           swal("Oops...", "Please Sign in to Comment", "error")
         });

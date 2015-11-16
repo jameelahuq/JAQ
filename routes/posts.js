@@ -200,6 +200,7 @@ router.post('/findByTag', function (req, res) {
 // and also populate the "author" field for each of those comments
 router.get('/comments/:postId', function (req, res) {
   Post.findById(req.params.postId)
+  .populate('author')
   .populate({
     path: 'comments',
     populate: {
@@ -212,18 +213,17 @@ router.get('/comments/:postId', function (req, res) {
 });
 
 
-router.get('/submit/:mail', function (req, res) {
+router.get('/submit/:mail/:name', function (req, res) {
   var mailgun = new Mailgun({
     apiKey: config.MAILGUN_KEY,
     domain: config.MAILGUN_DOMAIN
   });
   var data = {
     from: 'JAQd@blogs.com',
-    to: req.params.mail,
+    to: req.params.mail, 
     subject: "Hello from JAQ'd",
-    html: 'Somebody has commented on your post.'
-  };
-
+    html: req.params.name+' has commented on your post. <br/> <a href= "jaqd.herokuapp.com">Check it out on the site</a><br/> From, <br/> The Team at JAQd'
+  }
   mailgun.messages().send(data, function (err, body) {
     if (err) {
       res.send(err)

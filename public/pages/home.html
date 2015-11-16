@@ -25,7 +25,7 @@
 
                     <div class="medium-12 columns">
                         <input id="commentText" type="text" placeholder="Respond Nicely" ng-model="comment.text">
-                        <a class="button radius tiny" ng-click="addComment(comment); clearField()">Send</a>
+                        <a class="button radius tiny" ng-click="addComment(comment); clearField(); emailAuthor()">Send</a>
                     </div>
                 </div>
                 <div class="comment medium-12 columns"><a class="button radius tiny" value="Toggle First = {{box1}}" ng-click="box1=!box1; getComments(post._id);">{{post.comments.length}} Comments {{button}}</a>&nbsp; &nbsp; <a class="button radius tiny" ng-click="like(post._id)">{{liked}}</a>
@@ -59,9 +59,10 @@
         </ul>
 
         <div class="panel">
-            <h5>Featured</h5>
-            <p>Pork drumstick turkey fugiat. Tri-tip elit turducken pork chop in. Swine short ribs meatball irure bacon nulla pork belly cupidatat meatloaf cow.</p>
-            <a href="#">Read More →</a>
+            <h3>Featured</h3>
+            <h5>{{featuredPostTitle}}</h5>
+            <p>{{featuredPostBody}}...</p>
+            <a href="#/profile/{{featuredAuthor}}">Read More by this Author →</a>
         </div>
 
     </aside>
