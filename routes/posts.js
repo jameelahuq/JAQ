@@ -221,9 +221,9 @@ router.get('/submit/:mail/:name', function (req, res) {
   });
   var data = {
     from: 'JAQd@blogs.com',
-    to: req.params.mail,
+    to: req.params.mail, 
     subject: "Hello from JAQ'd",
-    html: req.params.name+' has commented on your post.'
+    html: req.params.name+' has commented on your post. <br/> <a href= "jaqd.herokuapp.com">Check it out on the site</a><br/> From, <br/> The Team at JAQd'
   }
   mailgun.messages().send(data, function (err, body) {
     if (err) {
