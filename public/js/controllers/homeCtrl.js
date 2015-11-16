@@ -81,6 +81,7 @@ jaqApp.controller('homeCtrl', function ($scope, $http, md5) {
   get();
 
   $scope.like = function (id) {
+    mixpanel.track("Liked Post", {"Page Name": "Liked post"})
 
     if ($scope.liked === "Dislike") {
       $http({
@@ -106,6 +107,7 @@ jaqApp.controller('homeCtrl', function ($scope, $http, md5) {
 
   var getComments = function () {
     $scope.getComments = function (id) {
+      mixpanel.track("Liked Post", {"Page Name": "Comments Viewed"})
       $http({
 
         method: 'GET',
@@ -117,6 +119,7 @@ jaqApp.controller('homeCtrl', function ($scope, $http, md5) {
         var number = response.data.comments.length - 1
         var commenter = response.data.comments[number].author.google.name;
         $scope.emailAuthor = function () {
+          mixpanel.track("Liked Post", {"Page Name": "Comment made"})
             $http({
               method: 'GET',
               url: 'posts/submit/' + response.data.author.google.email + '/' + commenter

@@ -9,6 +9,7 @@ $state.go('profile.yourposts')
   }).then(function successCallback(response) {
     $scope.picUrl = response.data.google.picUrl;
     $scope.author = response.data.google.name || "Guest" ;
+    mixpanel.track("user's profile viewed", {"Page Name": $scope.author})
     $scope.mailHash = md5.createHash(response.data.google.email || "");
     console.log("youtrl", response)
   }, function errorCallback(response) {
