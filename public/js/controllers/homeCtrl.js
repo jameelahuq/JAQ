@@ -116,8 +116,6 @@ jaqApp.controller('homeCtrl', function ($scope, $http, md5) {
         console.log("comments", response);
         var number = response.data.comments.length - 1
         var commenter = response.data.comments[number].author.google.name;
-      
-        
         $scope.emailAuthor = function () {
             $http({
               method: 'GET',
